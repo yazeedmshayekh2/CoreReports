@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>K2 AI Assistant</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link href="../static/css/chatbot.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Particle Background Effect -->
+    <div class="particle-bg" id="particle-bg"></div>
+    
+    <div class="container-fluid vh-100 p-0">
+        <div class="row h-100 g-0">
+            <!-- Sidebar -->
+            <div class="col-lg-3 col-md-4 sidebar d-none d-md-flex flex-column">
+                <div class="sidebar-header p-4">
+                    <h3 class="h4 mb-0 text-white">K2 AI Assistant</h3>
+                    <p class="small text-light opacity-75 mb-0">Intelligent Policy Assistant</p>
+                </div>
+                
+                <div class="sidebar-content flex-grow-1 p-3">
+                    <div class="chat-sessions">
+                        <h6 class="text-light opacity-75 mb-3 small">RECENT CONVERSATIONS</h6>
+                        <div class="session-item active mb-2">
+                            <div class="session-content">
+                                <div class="session-title">Policy Analysis Discussion</div>
+                                <div class="session-preview">How can I help with your policy queries today?</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="sidebar-footer p-3">
+                    <button class="btn btn-outline-light btn-sm w-100 mb-2 glass-effect">
+                        <i class="bi bi-plus-circle me-2"></i>New Conversation
+                    </button>
+                    <div class="d-flex align-items-center text-light small">
+                        <div class="avatar me-2 glow-effect">
+                            <i class="bi bi-person-circle fs-5"></i>
+                        </div>
+                        <span>User Profile</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Main Chat Area -->
+            <div class="col-lg-9 col-md-8 col-12 main-content d-flex flex-column">
+                <!-- Header -->
+                <div class="chat-header d-flex align-items-center justify-content-between p-3 border-bottom bg-white">
+                    <div class="d-flex align-items-center">
+                        <button class="btn btn-link d-md-none me-2 p-0" id="sidebar-toggle">
+                            <i class="bi bi-list fs-4"></i>
+                        </button>
+                        <div class="d-flex align-items-center">
+                            <div class="bot-avatar me-3">
+                                <i class="bi bi-robot text-primary"></i>
+                            </div>
+                            <div>
+                                <h5 class="mb-0">K2 Assistant</h5>
+                                <span class="badge bg-success-subtle text-success small">
+                                    <i class="bi bi-circle-fill me-1" style="font-size: 0.5rem;"></i>Online
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="header-actions">
+                        <button class="btn btn-outline-secondary btn-sm me-2 glass-effect" id="clear-chat" title="Clear Chat History">
+                            <i class="bi bi-trash3"></i>
+                        </button>
+                        <button class="btn btn-outline-secondary btn-sm glass-effect" id="settings" title="Settings">
+                            <i class="bi bi-gear"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Chat Messages -->
+                <div class="chat-messages flex-grow-1 p-4" id="chat-messages">
+                    <div class="welcome-message text-center py-5">
+                        <div class="welcome-icon mb-4">
+                            <i class="bi bi-chat-dots text-primary display-1"></i>
+                        </div>
+                        <h4 class="mb-3">Welcome to K2 AI Assistant</h4>
+                        <p class="mb-4 px-4">I'm here to help you with policy analysis, insights, and any questions you might have. How can I assist you today?</p>
+                        
+                        <div class="quick-actions row g-3 justify-content-center">
+                            <div class="col-auto">
+                                <button class="btn btn-outline-primary btn-sm quick-action glass-effect" data-message="Explain a policy document">
+                                    <i class="bi bi-file-text me-2"></i>Analyze Policy
+                                </button>
+                            </div>
+                            <div class="col-auto">
+                                <button class="btn btn-outline-primary btn-sm quick-action glass-effect" data-message="Search for specific regulations">
+                                    <i class="bi bi-search me-2"></i>Search Regulations
+                                </button>
+                            </div>
+                            <div class="col-auto">
+                                <button class="btn btn-outline-primary btn-sm quick-action glass-effect" data-message="Get compliance guidance">
+                                    <i class="bi bi-shield-check me-2"></i>Compliance Help
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Chat Input -->
+                <div class="chat-input-container p-4 border-top">
+                    <div class="input-group shadow-lg glass-effect">
+                        <button class="btn btn-outline-secondary glass-effect" type="button" id="attach-file" disabled title="Attach File (Coming Soon)">
+                            <i class="bi bi-paperclip"></i>
+                        </button>
+                        <input type="text" 
+                               class="form-control border-0 shadow-none" 
+                               id="message-input" 
+                               placeholder="Type your message here..." 
+                               autocomplete="off"
+                               maxlength="1000">
+                        <button class="btn btn-primary px-4 glow-effect" type="button" id="send-message" disabled title="Send Message">
+                            <i class="bi bi-send-fill"></i>
+                        </button>
+                    </div>
+                    <div class="input-footer mt-3 text-center">
+                        <small class="text-muted">
+                            <i class="bi bi-info-circle me-1"></i>
+                            K2 Assistant may occasionally generate incorrect information. Please verify important details.
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Typing Indicator (Hidden by default) -->
+    <div class="typing-indicator" id="typing-indicator" style="display: none;">
+        <div class="typing-bubble">
+            <div class="typing-dots">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom JavaScript -->
+    <script src="../static/js/chatbot.js"></script>
+</body>
+</html>

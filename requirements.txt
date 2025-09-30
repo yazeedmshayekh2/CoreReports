@@ -1,0 +1,22 @@
+# AI
+langchain
+langchain_community
+groq
+transformers
+httpx
+pydantic
+pydantic-settings
+torch
+
+# Environment Variables
+python-dotenv
+
+# Database
+cx_Oracle
+pandas
+
+# Agents / Graph Orchestration
+crewai
+crewai-tools
+google-generativeai
+langchain-google-genai
