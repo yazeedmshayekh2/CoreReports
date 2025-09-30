@@ -1,7 +1,7 @@
-# K2 Insurance AI Assistant - Intelligence System
+# CoreReports Insurance AI Assistant - Intelligence System
 
 ## Overview
-The K2 Intelligence System is a sophisticated, modular AI-powered solution for insurance data analysis and customer service. It has been completely refactored from a monolithic structure into a clean, maintainable, and scalable architecture.
+The CoreReports Intelligence System is a sophisticated, modular AI-powered solution for insurance data analysis and customer service. It has been completely refactored from a monolithic structure into a clean, maintainable, and scalable architecture.
 
 ## Architecture
 
