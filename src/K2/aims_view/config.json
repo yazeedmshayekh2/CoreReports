@@ -1,0 +1,184 @@
+{   
+    "ai": {
+        "groq_model": {
+            "groq_model_name": "openai/gpt-oss-120b",
+            "max_tokens": 32768,
+            "temperature": 0.7
+        },
+        "qwen_model": {
+            "qwen_model_name": "Qwen/Qwen3-8B-AWQ",
+            "max_tokens": 32768,
+            "temperature": 0.7
+        },
+        "prompts": {
+            "modelwrapper": {
+                "user_prompt": "Instructions: Provide a direct, clean answer without any thinking process, reasoning steps, or phrases like 'let me look through' or 'I need to'. Start immediately with the factual information."
+            }
+        }
+    },
+
+    "intelligence_manager": {
+        "max_cycles": 5,
+        "confidence_threshold": 0.85,
+        "retry_attempts": 3,
+        "ssl_bypass_enabled": true,
+        "streaming_enabled": true
+    },
+
+    "agents":{
+        "router":{
+            "models":{
+                    "gemini_model": {
+                    "model_name": "gemini/gemini-2.5-flash",
+                    "max_tokens": 10000,
+                    "temperature": 0.7
+                },
+                    "groq_model": {
+                    "model_name": "groq/llama-3.3-70b-versatile",
+                    "max_tokens": 10000,
+                    "temperature": 0.7
+                }, 
+                    "gemini_pro_model": {
+                    "model_name": "gemini/gemini-2.5-pro",
+                    "max_tokens": 10000,
+                    "temperature": 0.7
+                }
+            },
+            "agents": {
+                "intent_classifier": {
+                    "role": "Intent Classifier",
+                    "goal": "Classify user questions as either insurance-related or general inquiries",
+                    "max_iter": 2
+                },
+                "customer_retrieval": {
+                    "role": "Customer Data Specialist",
+                    "goal": "Retrieve customer information from the database using National ID, mobile number, or name",
+                    "max_iter": 3
+                },
+                "greeting": {
+                    "role": "Customer Service Greeter",
+                    "goal": "Provide warm, professional greetings to customers",
+                    "max_iter": 1
+                },
+                "validation": {
+                    "role": "Validation Specialist",
+                    "goal": "Validate Qatari National IDs and mobile numbers according to specified formats",
+                    "max_iter": 2
+                },
+                "customer_service": {
+                    "role": "Senior Insurance Customer Service Representative",
+                    "max_iter": 5
+                },
+                "general_assistant": {
+                    "role": "General Assistant",
+                    "goal": "Handle general inquiries that are not related to insurance matters",
+                    "max_iter": 2
+                },
+                "conversation_orchestrator": {
+                    "role": "Conversation Orchestrator",
+                    "max_iter": 10
+                },
+                "quality_assurance": {
+                    "role": "Quality Assurance Specialist",
+                    "goal": "Evaluate response quality and determine if additional thinking or refinement is needed",
+                    "max_iter": 1
+                },
+                "security_guardian": {
+                    "role": "Security Guardian",
+                    "goal": "Ensure content safety for admin-only system while allowing full access to customer data and insurance information",
+                    "max_iter": 1
+                }
+            }
+        },
+        "tools":{
+            "models":{
+                "groq_model": {
+                    "model_name": "groq/llama-3.3-70b-versatile",
+                    "max_tokens": 2000,
+                    "temperature": 0.1
+                }
+            },
+            "tools":{
+                "classify_intent_intelligent": {
+                    "role": "Intent Classification Specialist",
+                    "goal": "Accurately classify user intent based on semantic understanding and context",
+                    "expected_output": "One of these exact intent names: general, insurance_new, current_customer, or another_customer"
+                },
+                "extract_qatari_id_intelligent": {
+                    "role": "ID Extraction Specialist",
+                    "goal": "Extract Qatari National IDs from user messages with high accuracy",
+                    "expected_output": "The 11-digit Qatari National ID or 'NOT_FOUND' if no valid ID exists"
+                },
+                "extract_mobile_number_intelligent": {
+                    "role": "Mobile Extraction Specialist",
+                    "goal": "Extract mobile numbers from user messages with high accuracy",
+                    "expected_output": "The 8-digit mobile number or 'NOT_FOUND' if no valid mobile exists"
+                }
+            },
+            "validations":{
+                "validate_qatari_id": {
+                    "messages": {
+                        "valid":"Valid Qatari National ID format",
+                        "invalid":"Invalid format. Qatari National ID must be exactly 11 digits with numbers only."
+                    }
+                },
+                "validate_mobile_number": {
+                    "messages": {
+                        "valid":"Valid mobile number format",
+                        "invalid":"Invalid format. Mobile number must be exactly 8 digits with numbers only."
+                    }
+                },
+                "get_customer_by_id": {
+                    "messages": {
+                        "valid":"Customer found successfully by National ID",
+                        "invalid":"No customer found with this National ID"
+                    }
+                },
+                "get_customer_by_mobile": {
+                    "messages": {
+                        "valid":"Customer found successfully by mobile number",
+                        "invalid":"No customer found with this mobile number"
+                    }
+                },
+                "get_customer_by_name": {
+                    "messages": {
+                        "valid":"Customer found successfully by name",
+                        "invalid":"No customer found with this name"
+                    }
+                }
+            },
+            "agents":{
+                "name_matching": {
+                    "role": "Customer Name Matching Specialist",
+                    "goal": "Intelligently match user name inputs to exact database customer names using semantic understanding",
+                    "expected_output": "The exact database name that matches, or 'NO_MATCH' if uncertain"
+                },
+                "quality_evaluator": {
+                    "role": "Response Quality Evaluator",
+                    "goal": "Analyze the coherence, completeness, and accuracy of insurance-related responses",
+                    "expected_output": "Quality score (1-10) with detailed feedback and improvement suggestions"
+                },
+                "security_validator": {
+                    "role": "Admin Security Validator", 
+                    "goal": "Detect genuinely harmful content while allowing full customer data access for authorized administrators",
+                    "expected_output": "Security assessment with risk level, permissive for customer data and insurance information"
+                },
+                "content_filter": {
+                    "role": "Admin Content Filter",
+                    "goal": "Filter toxic and harmful content while preserving access to all customer and insurance data",
+                    "expected_output": "SAFE/UNSAFE classification, permissive for legitimate administrative content"
+                },
+                "hallucination_detector": {
+                    "role": "AI Hallucination Detector",
+                    "goal": "Identify potential hallucinations, false information, or inconsistencies in responses",
+                    "expected_output": "Hallucination risk assessment with confidence score and flagged content"
+                }
+            }
+        }
+
+    },
+
+    "database": {
+        "oracle_client_path": "/home/user/oracle/instantclient_23_9"
+    }
+}
