@@ -363,9 +363,32 @@ class DomainKnowledge(SecureOracleDBUtils):
         SELECT DISTINCT DOC_BRANCH, DOC_BRANCH_NAME FROM insmv.AIMS_ALL_DATA
         """
         df = self._safe_execute_query(query)
+        
         zip_df = zip(df['DOC_BRANCH'], df['DOC_BRANCH_NAME'])
-        list_zip_df = list(zip_df)
-        knowledge = {
-            "dynamic_branches": list_zip_df
-        }
+        
+        knowledge = ""
+        
+        for branch, name in zip_df:
+            knowledge = f"id: {branch}, name: {name}\n{knowledge}"
+        
         return knowledge
+    
+    def dynamic_offices_for_branch(self):
+        """Get the dynamic offices for a branch"""
+        query = """
+        SELECT DISTINCT DOC_BRANCH, DOC_BRANCH_NAME, DOC_OFFICE, DOC_OFFICE_NAME FROM insmv.AIMS_ALL_DATA
+        ORDER BY DOC_BRANCH
+        """
+        df = self._safe_execute_query(query)
+        zip_df = zip(df['DOC_BRANCH'], df['DOC_BRANCH_NAME'], df['DOC_OFFICE'], df['DOC_OFFICE_NAME'])
+        
+        knowledge = ""
+        
+        for branch, name, office, office_name in zip_df:
+            knowledge = f"id: {branch}, name: {name}, office: {office}, office_name: {office_name}\n{knowledge}"
+        
+        return knowledge
+    
+if __name__ == "__main__":
+    db_utils = DomainKnowledge()
+    print(db_utils.dynamic_offices_for_branch())

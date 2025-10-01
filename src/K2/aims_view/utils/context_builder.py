@@ -8,6 +8,73 @@ def get_comprehensive_aims_knowledge_summary() -> str:
     return f"""
 === COMPREHENSIVE AIMS DATABASE KNOWLEDGE ===
 
+🔴 CRITICAL: ORACLE SQL TOP QUERIES 🔴
+⚠️ ORACLE DOES NOT SUPPORT 'LIMIT' OR 'TOP' KEYWORDS!
+
+✅ ROWNUM WITH SUBQUERY - THE ONLY METHOD TO USE
+CRITICAL: MUST use subquery - ROWNUM is evaluated BEFORE ORDER BY
+
+Syntax: SELECT * FROM (SELECT ... ORDER BY ...) WHERE ROWNUM <= N
+
+Example - Top 10 customers by premium (NAME grouping - default):
+SELECT * FROM (
+    SELECT DOC_CUST_NAME, SUM(DOC_PREMIUM) as TOTAL_PREMIUM
+    FROM insmv.AIMS_ALL_DATA
+    GROUP BY DOC_CUST_NAME
+    ORDER BY TOTAL_PREMIUM DESC
+) WHERE ROWNUM <= 10
+
+Example - Top 5 brokers by policies:
+SELECT * FROM (
+    SELECT DOC_AGENT_NAME, COUNT(DISTINCT DOC_KEY_FORM) as POLICY_COUNT
+    FROM insmv.AIMS_ALL_DATA
+    WHERE DOC_AGENT_NAME IS NOT NULL AND DOC_TYPE IN (1, 4)
+    GROUP BY DOC_AGENT_NAME
+    ORDER BY POLICY_COUNT DESC
+) WHERE ROWNUM <= 5
+
+❌ COMMON MISTAKES TO AVOID:
+• NEVER use 'LIMIT N' - This is MySQL/PostgreSQL syntax
+• NEVER use 'TOP N' - This is SQL Server syntax
+• NEVER use 'FETCH FIRST' - Use ROWNUM instead
+• NEVER use ROWNUM without subquery when ORDER BY is needed
+• NEVER put ORDER BY after WHERE ROWNUM - wrong order!
+
+✅ CORRECT PATTERN: SELECT * FROM (inner query with ORDER BY) WHERE ROWNUM <= N
+
+🎯 TRIGGER KEYWORDS: top, first, highest, lowest, largest, smallest, best, worst, most, least
+When you see these keywords, automatically wrap in subquery with WHERE ROWNUM <= N!
+
+🔴 CRITICAL: GROUPING RULES FOR TOP QUERIES 🔴
+
+FOR CUSTOMER AGGREGATION:
+✅ DEFAULT: Group by customer NAME (DOC_CUST_NAME) - Customer-level view
+   - Use when: User asks for "top customers", "top 10 customers", "customers by premium"
+   - Syntax: GROUP BY DOC_CUST_NAME
+   - Example: SELECT DOC_CUST_NAME, SUM(DOC_PREMIUM) as TOTAL_PREMIUM
+             FROM insmv.AIMS_ALL_DATA
+             GROUP BY DOC_CUST_NAME
+             ORDER BY TOTAL_PREMIUM DESC
+             FETCH FIRST 10 ROWS ONLY
+   - Result: Top 10 customers (one row per customer name, all IDs aggregated)
+
+❌ ID-LEVEL: Group by NAME + ID (DOC_CUST_NAME, CUST_ID_NO) - ID-level view
+   - Use ONLY when: User explicitly says "by ID", "per ID", "each customer ID", "individual IDs"
+   - Syntax: GROUP BY DOC_CUST_NAME, CUST_ID_NO
+   - Result: Top 10 customer IDs (one customer may appear multiple times with different IDs)
+
+KEY DISTINCTION:
+• Grouping by NAME = Customer-level aggregation (DEFAULT)
+• Grouping by NAME + ID = ID-level aggregation (ONLY when explicitly requested)
+• One customer name can have multiple IDs - name grouping consolidates them
+• Most business queries expect customer-level (name) aggregation
+
+EXAMPLES:
+• "top 10 customers" → GROUP BY DOC_CUST_NAME (default)
+• "top 10 customers by premium" → GROUP BY DOC_CUST_NAME (default)
+• "top 10 customer IDs" → GROUP BY DOC_CUST_NAME, CUST_ID_NO (explicit ID level)
+• "customers by ID" → GROUP BY DOC_CUST_NAME, CUST_ID_NO (explicit ID level)
+
 BUSINESS OVERVIEW:
 Insurance management system with 200+ fields covering policies, claims, payments, and reinsurance.
 Multi-national insurance company with 5 branches, 32 offices, and 9 lines of business operations.
@@ -30,7 +97,7 @@ KEY STATISTICS:
 CRITICAL BUSINESS RULES:
 • Policy Key: branch + office + class + subclass + pol_no + pol_year
 • CRITICAL DUAL COUNTING: For policy count questions, provide BOTH values:
-  - POLICY COUNT: COUNT(DISTINCT CASE WHEN DOC_TYPE IN (1,4) THEN DOC_KEY_FORM END)
+  - POLICY COUNT: COUNT(DISTINCT CASE WHEN DOC_TYPE IN (1,4) THEN DOC_KEY_FORM END) # if no DOC_TYPE filter, then all types
   - TRANSACTION COUNT: COUNT(DISTINCT DOC_KEY_FORM)
 • DOC_KEY_FORM: Unique document identifier - THE field for all counting operations
 • DOC_TYPE Values: 1=New Policy, 4=Renewal Policy (actual policies), Others=Amendments/Cancellations/etc (transactions)

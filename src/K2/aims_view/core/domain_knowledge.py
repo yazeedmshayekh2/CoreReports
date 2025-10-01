@@ -3,7 +3,6 @@ AIMS Database Domain Knowledge
 Contains comprehensive knowledge about the insurance database structure and business rules
 """
 
-
 def load_aims_domain_knowledge():
     """Load comprehensive AIMS database domain knowledge from complete documentation"""
     return {
@@ -96,6 +95,110 @@ def load_aims_domain_knowledge():
             "policy_key": "branch + office + class + subclass + pol_no + pol_year",
             "claim_key": "CLAIM_BRANCH + CLAIM_OFFICE + class + subclass + CLAIM_NO + CLAIM_ACC_YEAR",
             "payment_key": "claim_key + PAY_SLIP_NO + PAY_SLIP_YEAR",
+            "oracle_top_queries": {
+                "critical_note": "⚠️ ORACLE DOES NOT SUPPORT 'LIMIT' - ALWAYS use ROWNUM with subquery",
+                "rownum_method": {
+                    "name": "ROWNUM with Subquery - STANDARD METHOD",
+                    "description": "Works in all Oracle versions - requires subquery for proper ORDER BY",
+                    "syntax": "SELECT * FROM (SELECT columns FROM table WHERE conditions ORDER BY column DESC) WHERE ROWNUM <= N",
+                    "critical_rule": "MUST use subquery - ROWNUM is evaluated BEFORE ORDER BY",
+                    "examples": {
+                        "top_10_customers_by_premium": """SELECT * FROM (
+    SELECT DOC_CUST_NAME, SUM(DOC_PREMIUM) as TOTAL_PREMIUM
+    FROM insmv.AIMS_ALL_DATA
+    GROUP BY DOC_CUST_NAME
+    ORDER BY TOTAL_PREMIUM DESC
+) WHERE ROWNUM <= 10""",
+                        "top_5_brokers_by_policies": """SELECT * FROM (
+    SELECT DOC_AGENT_NAME, COUNT(DISTINCT DOC_KEY_FORM) as POLICY_COUNT
+    FROM insmv.AIMS_ALL_DATA
+    WHERE DOC_AGENT_NAME IS NOT NULL AND DOC_TYPE IN (1, 4)
+    GROUP BY DOC_AGENT_NAME
+    ORDER BY POLICY_COUNT DESC
+) WHERE ROWNUM <= 5""",
+                        "top_20_claims_by_amount": """SELECT * FROM (
+    SELECT CLAIM_NO, DOC_CUST_NAME, PAY_AMT, CLAIM_OS_VAL
+    FROM insmv.AIMS_ALL_DATA
+    WHERE CLAIM_NO IS NOT NULL
+    ORDER BY PAY_AMT DESC
+) WHERE ROWNUM <= 20""",
+                        "top_15_offices_by_policy_count": """SELECT * FROM (
+    SELECT DOC_OFFICE_NAME, DOC_BRANCH_NAME, COUNT(DISTINCT DOC_KEY_FORM) as POLICY_COUNT
+    FROM insmv.AIMS_ALL_DATA
+    WHERE DOC_TYPE IN (1, 4) 
+    GROUP BY DOC_OFFICE_NAME, DOC_BRANCH_NAME
+    ORDER BY POLICY_COUNT DESC
+) WHERE ROWNUM <= 15"""
+                    }
+                },
+                "common_mistakes": [
+                    "❌ NEVER use 'LIMIT N' - This is MySQL/PostgreSQL syntax, NOT Oracle",
+                    "❌ NEVER use 'TOP N' - This is SQL Server syntax, NOT Oracle",
+                    "❌ NEVER use 'FETCH FIRST' - Use ROWNUM instead",
+                    "❌ NEVER use ROWNUM without subquery when ORDER BY is needed",
+                    "❌ NEVER put ORDER BY after WHERE ROWNUM - wrong order!"
+                ],
+                "correct_pattern": "SELECT * FROM (inner query with ORDER BY) WHERE ROWNUM <= N",
+                "keyword_detection": {
+                    "triggers": ["top", "first", "highest", "lowest", "largest", "smallest", "best", "worst", "most", "least"],
+                    "action": "Automatically wrap in subquery with WHERE ROWNUM <= N"
+                },
+                "performance_tips": [
+                    "Always include ORDER BY when using TOP queries",
+                    "Use indexes on ORDER BY columns for better performance",
+                    "For aggregated TOP queries, use HAVING clause to filter before ordering",
+                    "ROWNUM is evaluated before ORDER BY - subquery is mandatory"
+                ],
+                "critical_grouping_rules": {
+                    "customer_aggregation": {
+                        "default_behavior": "Group by customer NAME (DOC_CUST_NAME) unless user explicitly requests ID grouping",
+                        "reasoning": "One customer name may have multiple customer IDs, grouping by name gives customer-level view",
+                        "name_grouping": {
+                            "when_to_use": "Default for all customer queries unless specified otherwise",
+                            "syntax": "GROUP BY DOC_CUST_NAME",
+                            "example": """SELECT DOC_CUST_NAME, SUM(DOC_PREMIUM) as TOTAL_PREMIUM
+FROM insmv.AIMS_ALL_DATA
+GROUP BY DOC_CUST_NAME
+ORDER BY TOTAL_PREMIUM DESC
+FETCH FIRST 10 ROWS ONLY""",
+                            "result": "Gets top 10 customers by name, aggregating all their IDs together"
+                        },
+                        "id_grouping": {
+                            "when_to_use": "ONLY when user explicitly says 'by ID', 'per ID', 'each customer ID', 'individual IDs'",
+                            "syntax": "GROUP BY DOC_CUST_NAME, CUST_ID_NO",
+                            "example": """SELECT DOC_CUST_NAME, CUST_ID_NO, SUM(DOC_PREMIUM) as TOTAL_PREMIUM
+FROM insmv.AIMS_ALL_DATA
+GROUP BY DOC_CUST_NAME, CUST_ID_NO
+ORDER BY TOTAL_PREMIUM DESC
+FETCH FIRST 10 ROWS ONLY""",
+                            "result": "Gets top 10 customer IDs, treating each ID separately even if same name"
+                        },
+                        "key_distinction": "Grouping by NAME = Customer-level aggregation | Grouping by NAME + ID = ID-level aggregation",
+                        "examples": {
+                            "top_10_customers": "GROUP BY DOC_CUST_NAME (default - customer level)",
+                            "top_10_customers_by_name": "GROUP BY DOC_CUST_NAME (explicit name grouping)",
+                            "top_10_customer_ids": "GROUP BY DOC_CUST_NAME, CUST_ID_NO (ID level)",
+                            "top_10_customers_per_id": "GROUP BY DOC_CUST_NAME, CUST_ID_NO (explicit ID grouping)"
+                        },
+                        "important_notes": [
+                            "DEFAULT: Always use GROUP BY DOC_CUST_NAME for customer queries",
+                            "Include CUST_ID_NO in GROUP BY ONLY when user explicitly requests ID-level breakdown",
+                            "One customer name can have multiple IDs - name grouping consolidates them",
+                            "Most business users expect customer-level (name) aggregation, not ID-level"
+                        ]
+                    },
+                    "agent_broker_aggregation": {
+                        "default_behavior": "Group by agent/broker NAME (DOC_AGENT_NAME) - always name level",
+                        "reasoning": "Agent names are unique identifiers in the system",
+                        "syntax": "GROUP BY DOC_AGENT_NAME"
+                    },
+                    "office_branch_aggregation": {
+                        "default_behavior": "Group by both office and branch for complete identification",
+                        "syntax": "GROUP BY DOC_OFFICE_NAME, DOC_BRANCH_NAME",
+                        "reasoning": "Office names may repeat across branches, need both for uniqueness"
+                    }
+                }
+            },
             "policy_counting": {
                 "rule": "For policy counting questions, provide BOTH policy count and transaction count",
                 "field_to_count": "DOC_KEY_FORM",

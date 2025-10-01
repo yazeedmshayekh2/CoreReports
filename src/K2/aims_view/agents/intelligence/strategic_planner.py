@@ -14,7 +14,7 @@ class StrategicPlanner:
         self.agent = self._create_agent()
     
     def _create_agent(self) -> Agent:
-        """Create strategic planning agent"""
+        """Create strategic planning agent with resilient LLM"""
         return Agent(
             role="Strategic Query Planner",
             goal="Create intelligent, multi-step execution strategies using comprehensive AIMS database knowledge",
@@ -43,12 +43,18 @@ class StrategicPlanner:
             - Data sources: 11 sources (Mobile App, Agent/Broker, Web, Call Center, etc.)
             - Accident types: 43 different types (majority: Material damage to third party vehicle)
             
+            CRITICAL ORACLE SQL KNOWLEDGE:
+            - Oracle does NOT support LIMIT or TOP keywords
+            - For TOP N queries, use: FETCH FIRST N ROWS ONLY (Oracle 12c+)
+            - Alternative: Use ROWNUM with subquery: SELECT * FROM (SELECT ... ORDER BY ...) WHERE ROWNUM <= N
+            - NEVER use LIMIT, always use FETCH FIRST or ROWNUM with subquery
+            
             You excel at determining when questions need preliminary data gathering versus direct answers, 
             understanding the scope of available data, and creating execution plans that leverage AIMS 
             business logic for maximum accuracy.""",
             verbose=True,
             allow_delegation=False,
-            llm=self.llm_factory.create_gemini_llm(),
+            llm=self.llm_factory.create_resilient_llm(prefer_gemini=True),
             max_iter=3
         )
     

@@ -54,10 +54,36 @@ class QueryArchitect:
             - Individual customers: CUST_ID_NO IS NOT NULL AND COMP_EID_NO IS NULL
             - Company customers: CUST_ID_NO IS NULL AND COMP_EID_NO IS NOT NULL
             - Loss ratio calculation - Use SQL template: SELECT (( SUM(COALESCE(T.PAY_AMT, 0)) + SUM(COALESCE(T.CLAIM_OS_VAL, 0)) - SUM(COALESCE(T.PAY_REC_AMT, 0)) ) / NULLIF(SUM(COALESCE(T.DOC_PREMIUM, 0)), 0)) * 100 AS LOSS_RATIO FROM insmv.AIMS_ALL_DATA T
-            - Renewals: DOC_TYPE = 4 AND REN_POL_NO, REN_POL_YEAR not null""",
+            - Renewals: DOC_TYPE = 4 AND REN_POL_NO, REN_POL_YEAR not null
+            
+            CRITICAL ORACLE SQL TOP QUERIES KNOWLEDGE:
+            - Oracle does NOT support LIMIT, TOP, or FETCH FIRST keywords
+            - ALWAYS use ROWNUM with subquery: SELECT * FROM (SELECT ... ORDER BY ...) WHERE ROWNUM <= N
+            - CRITICAL: MUST use subquery - ROWNUM is evaluated BEFORE ORDER BY
+            - NEVER use 'LIMIT N' - This is MySQL/PostgreSQL syntax
+            - NEVER use 'TOP N' - This is SQL Server syntax
+            - NEVER use 'FETCH FIRST' - Use ROWNUM instead
+            - NEVER use ROWNUM without subquery when ORDER BY is needed
+            - Examples:
+              * Top 10 customers: SELECT * FROM (SELECT DOC_CUST_NAME, SUM(DOC_PREMIUM) as TOTAL FROM ... GROUP BY DOC_CUST_NAME ORDER BY TOTAL DESC) WHERE ROWNUM <= 10
+              * Top 5 brokers: SELECT * FROM (SELECT DOC_AGENT_NAME, COUNT(*) as CNT FROM ... GROUP BY DOC_AGENT_NAME ORDER BY CNT DESC) WHERE ROWNUM <= 5
+            - Trigger keywords: top, first, highest, lowest, largest, smallest, best, worst, most, least
+            - When you see these keywords, automatically wrap in subquery with WHERE ROWNUM <= N!
+            
+            CRITICAL GROUPING RULES FOR CUSTOMER QUERIES:
+            - DEFAULT: Group by customer NAME only (GROUP BY DOC_CUST_NAME)
+            - This is the standard business expectation - customer-level aggregation
+            - One customer name may have multiple IDs - grouping by name consolidates them
+            - Include CUST_ID_NO in GROUP BY ONLY when user explicitly says "by ID", "per ID", "each customer ID"
+            - Examples:
+              * "top 10 customers" → GROUP BY DOC_CUST_NAME (name level - default)
+              * "top 10 customers by premium" → GROUP BY DOC_CUST_NAME (name level - default)
+              * "top 10 customer IDs" → GROUP BY DOC_CUST_NAME, CUST_ID_NO (ID level - explicit)
+            - KEY DISTINCTION: NAME grouping = customer level | NAME + ID grouping = ID level
+            - Most queries expect customer-level (name) aggregation, not ID-level""",
             verbose=True,
             allow_delegation=False,
-            llm=self.llm_factory.create_gemini_pro_llm(),
+            llm=self.llm_factory.create_resilient_llm(prefer_gemini=True),
             max_iter=4
         )
     

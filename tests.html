@@ -236,6 +236,12 @@
             font-style: italic;
             color: #666;
         }
+
+        .ai-results > table {
+            display: block;
+            overflow-x: auto;
+            white-space: nowrap;
+        }
     </style>
 </head>
 <body>
@@ -332,7 +338,7 @@
                 </div>
                 <div class="footer-item">
                     <div class="footer-label">If False - Description</div>
-                    <div class="footer-value">None</div>
+                    <div class="footer-value">None.</div>
                 </div>
                 <div class="footer-item">
                     <div class="footer-label">Which Try</div>
@@ -1553,27 +1559,27 @@
         <div class="test-card">
             <div class="test-header">
                 <span class="test-id">Test ID: 5</span>
-                <div class="report-name">Write here the report name for the test.</div>
+                <div class="report-name">Claim Details By Policy</div>
             </div>
             <div class="test-body">
                 <div class="field">
                     <div class="field-label">Description</div>
                     <div class="field-content">
-                        Write here the description for the test.
+                         Show the details of the claims for some customer based on his/her insured code for each claim.
                     </div>
                 </div>
 
                 <div class="field">
                     <div class="field-label">Conditions</div>
                     <div class="field-content">
-                        Write here the conditions for the test.
+                        Customer code 8000115009, The policy year 2023, The major is group life, and The branch is the main branch.
                     </div>
                 </div>
 
                 <div class="field">
                     <div class="field-label">Input</div>
                     <div class="field-content">
-                        Write here the input for the test.
+                        For the customer with code 8000115009, could you please display these information as a policy wise - for each policy -> Customer Code, Customer Name, Major, Minor, Business Type, Policy year, Policy Number, the claim number, claim registration date, claim accident date, claim accident year, claim status, and Total claim. Under the main branch, and also Major type is group life. The policy year is 2023. Show your answer in a table. Sum them over based payment number, don't consider the payment number.
                     </div>
                 </div>
 
@@ -1581,12 +1587,256 @@
                 <div class="field">
                     <div class="field-label">Expected Results</div>
                     <div class="table-container">
-
+                        <table style="font-size: 0.7em;">
+                            <thead>
+                                <tr>
+                                  <th>Insured Name</th>
+                                  <th>Insured Code</th>
+                                  <th>Line of Business</th>
+                                  <th>Policy Type</th>
+                                  <th>Business Type</th>
+                                  <th>Pol Year</th>
+                                  <th>Pol No</th>
+                                  <th>Unique Pol Key</th>
+                                  <th>Registration Date</th>
+                                  <th>Reference Key</th>
+                                  <th>Date of Loss</th>
+                                  <th>Claim Key</th>
+                                  <th>Claim Reg Dt</th>
+                                  <th>Claim Status</th>
+                                  <th>Gross Incurred Claims</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr>
+                                  <td>Ezdan Holding Group</td>
+                                  <td>8000115009</td>
+                                  <td>Group Life &amp; Medical</td>
+                                  <td>Group Medical (DohaCare)</td>
+                                  <td>Co-Insurance</td>
+                                  <td>2023</td>
+                                  <td>86</td>
+                                  <td>01/01/LM/MED/86/2023/P</td>
+                                  <td>25-Jul-23</td>
+                                  <td>01/01/LM/MED/86/2023/P/Add2/857</td>
+                                  <td>1-Apr-23</td>
+                                  <td>2023/4583</td>
+                                  <td>26-Jul-23</td>
+                                  <td>Closed</td>
+                                  <td style="text-align:right;">8,465</td>
+                                </tr>
+                                <tr>
+                                  <td>Ezdan Holding Group</td>
+                                  <td>8000115009</td>
+                                  <td>Group Life &amp; Medical</td>
+                                  <td>Group Medical (DohaCare)</td>
+                                  <td>Co-Insurance</td>
+                                  <td>2023</td>
+                                  <td>86</td>
+                                  <td>01/01/LM/MED/86/2023/P</td>
+                                  <td>19-Dec-23</td>
+                                  <td>01/01/LM/MED/86/2023/P/Add7/1583</td>
+                                  <td>19-Apr-23</td>
+                                  <td>2023/8239</td>
+                                  <td>21-Dec-23</td>
+                                  <td>Closed</td>
+                                  <td style="text-align:right;">300,006</td>
+                                </tr>
+                                <tr>
+                                  <td>Ezdan Holding Group</td>
+                                  <td>8000115009</td>
+                                  <td>Group Life &amp; Medical</td>
+                                  <td>Group Medical (DohaCare)</td>
+                                  <td>Co-Insurance</td>
+                                  <td>2023</td>
+                                  <td>86</td>
+                                  <td>01/01/LM/MED/86/2023/P</td>
+                                  <td>23-Apr-24</td>
+                                  <td>01/01/LM/MED/86/2023/P/Add9/445</td>
+                                  <td>30-Jul-23</td>
+                                  <td>2024/5292</td>
+                                  <td>11-Jul-24</td>
+                                  <td>Closed</td>
+                                  <td style="text-align:right;">142,502</td>
+                                </tr>
+                                <tr>
+                                  <td>Ezdan Holding Group</td>
+                                  <td>8000115009</td>
+                                  <td>Group Life &amp; Medical</td>
+                                  <td>Group Medical (DohaCare)</td>
+                                  <td>Co-Insurance</td>
+                                  <td>2023</td>
+                                  <td>86</td>
+                                  <td>01/01/LM/MED/86/2023/P</td>
+                                  <td>23-Apr-24</td>
+                                  <td>01/01/LM/MED/86/2023/P/Add9/445</td>
+                                  <td>12-Sep-23</td>
+                                  <td>2024/5327</td>
+                                  <td>14-Jul-24</td>
+                                  <td>Closed</td>
+                                  <td style="text-align:right;">786,423</td>
+                                </tr>
+                                <tr>
+                                  <td>Ezdan Holding Group</td>
+                                  <td>8000115009</td>
+                                  <td>Group Life &amp; Medical</td>
+                                  <td>Group Medical (DohaCare)</td>
+                                  <td>Co-Insurance</td>
+                                  <td>2023</td>
+                                  <td>86</td>
+                                  <td>01/01/LM/MED/86/2023/P</td>
+                                  <td>23-Apr-24</td>
+                                  <td>01/01/LM/MED/86/2023/P/Add9/445</td>
+                                  <td>30-Mar-24</td>
+                                  <td>2024/5615</td>
+                                  <td>20-Jul-24</td>
+                                  <td>Closed</td>
+                                  <td style="text-align:right;">94,185</td>
+                                </tr>
+                                <tr>
+                                  <td>Ezdan Holding Group</td>
+                                  <td>8000115009</td>
+                                  <td>Group Life &amp; Medical</td>
+                                  <td>Group Medical (DohaCare)</td>
+                                  <td>Co-Insurance</td>
+                                  <td>2023</td>
+                                  <td>86</td>
+                                  <td>01/01/LM/MED/86/2023/P</td>
+                                  <td>23-Apr-24</td>
+                                  <td>01/01/LM/MED/86/2023/P/Add9/445</td>
+                                  <td>30-Mar-24</td>
+                                  <td>2024/8219</td>
+                                  <td>13-Oct-24</td>
+                                  <td>Closed</td>
+                                  <td style="text-align:right;">12,195</td>
+                                </tr>
+                              </tbody>
+                        </table>
                     </div>
                 </div>
 
                 <div class="field">
                     <div class="field-label">AI Results</div>
+                    Here is the policy-wise breakdown of claims for Ezdan Holding Group (Customer Code: 8000115009) for Policy Year 2023, under the 'GROUP LIFE & MEDICAL' major type:
+                        <div class="table-container">
+                            <table style="font-size: 0.7em;">
+                                <thead>
+                                    <tr style="background:#f2f2f2;">
+                                    <th>Customer Code</th>
+                                    <th>Customer Name</th>
+                                    <th>Major</th>
+                                    <th>Minor</th>
+                                    <th>Business Type</th>
+                                    <th>Policy Year</th>
+                                    <th>Policy Number</th>
+                                    <th>Claim Number</th>
+                                    <th>Claim Registration Date</th>
+                                    <th>Claim Accident Date</th>
+                                    <th>Claim Accident Year</th>
+                                    <th>Claim Status</th>
+                                    <th>Total Claim (QAR)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                    <td>8000115009</td>
+                                    <td>Ezdan Holding Group</td>
+                                    <td>GROUP LIFE &amp; MEDICAL</td>
+                                    <td>Group Medical (DohaCare)</td>
+                                    <td>DIRECT</td>
+                                    <td>2023</td>
+                                    <td>86</td>
+                                    <td>4583</td>
+                                    <td>2023-07-26</td>
+                                    <td>2023-04-01</td>
+                                    <td>2023</td>
+                                    <td>Close</td>
+                                    <td style="text-align:right;">8,464.63</td>
+                                    </tr>
+                                    <tr>
+                                    <td>8000115009</td>
+                                    <td>Ezdan Holding Group</td>
+                                    <td>GROUP LIFE &amp; MEDICAL</td>
+                                    <td>Group Medical (DohaCare)</td>
+                                    <td>DIRECT</td>
+                                    <td>2023</td>
+                                    <td>86</td>
+                                    <td>5292</td>
+                                    <td>2024-07-11</td>
+                                    <td>2023-07-30</td>
+                                    <td>2024</td>
+                                    <td>Close</td>
+                                    <td style="text-align:right;">142,501.74</td>
+                                    </tr>
+                                    <tr>
+                                    <td>8000115009</td>
+                                    <td>Ezdan Holding Group</td>
+                                    <td>GROUP LIFE &amp; MEDICAL</td>
+                                    <td>Group Medical (DohaCare)</td>
+                                    <td>DIRECT</td>
+                                    <td>2023</td>
+                                    <td>86</td>
+                                    <td>5327</td>
+                                    <td>2024-07-14</td>
+                                    <td>2023-09-12</td>
+                                    <td>2024</td>
+                                    <td>Close</td>
+                                    <td style="text-align:right;">786,423.11</td>
+                                    </tr>
+                                    <tr>
+                                    <td>8000115009</td>
+                                    <td>Ezdan Holding Group</td>
+                                    <td>GROUP LIFE &amp; MEDICAL</td>
+                                    <td>Group Medical (DohaCare)</td>
+                                    <td>DIRECT</td>
+                                    <td>2023</td>
+                                    <td>86</td>
+                                    <td>5615</td>
+                                    <td>2024-07-20</td>
+                                    <td>2024-03-30</td>
+                                    <td>2024</td>
+                                    <td>Close</td>
+                                    <td style="text-align:right;">94,184.77</td>
+                                    </tr>
+                                    <tr>
+                                    <td>8000115009</td>
+                                    <td>Ezdan Holding Group</td>
+                                    <td>GROUP LIFE &amp; MEDICAL</td>
+                                    <td>Group Medical (DohaCare)</td>
+                                    <td>DIRECT</td>
+                                    <td>2023</td>
+                                    <td>86</td>
+                                    <td>8219</td>
+                                    <td>2024-10-13</td>
+                                    <td>2024-03-30</td>
+                                    <td>2024</td>
+                                    <td>Close</td>
+                                    <td style="text-align:right;">12,195.05</td>
+                                    </tr>
+                                    <tr>
+                                    <td>8000115009</td>
+                                    <td>Ezdan Holding Group</td>
+                                    <td>GROUP LIFE &amp; MEDICAL</td>
+                                    <td>Group Medical (DohaCare)</td>
+                                    <td>DIRECT</td>
+                                    <td>2023</td>
+                                    <td>86</td>
+                                    <td>8239</td>
+                                    <td>2023-12-21</td>
+                                    <td>2023-04-19</td>
+                                    <td>2023</td>
+                                    <td>Close</td>
+                                    <td style="text-align:right;">300,006.21</td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr style="background:#f9f9f9; font-weight:bold;">
+                                    <td colspan="12" style="text-align:right; padding-right:12px;">Total</td>
+                                    <td style="text-align:right;">1,343,775.51</td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
                     <div class="ai-results" id="ai-result-5"></div>
                 </div>
             </div>
@@ -1597,11 +1847,11 @@
                 </div>  
                 <div class="footer-item">
                     <div class="footer-label">If False - Description</div>
-                    <div class="footer-value">Write here the description for the test.</div>
+                    <div class="footer-value">None</div>
                 </div>
                 <div class="footer-item">
                     <div class="footer-label">Which Try</div>
-                    <div class="footer-value">Write here the try for the test.</div>
+                    <div class="footer-value">Second Try</div>
                 </div>
                 <div class="footer-item">
                     <div class="footer-label">Tested With</div>
@@ -1614,7 +1864,521 @@
             </div>
         </div>
 
-        <!-- Test n -->
+        <!-- Test 6 -->
+        <div class="test-card">
+            <div class="test-header">
+                <span class="test-id">Test ID: 6</span>
+                <div class="report-name">Top 20 Customers Gross</div>
+            </div>
+            <div class="test-body">
+                <div class="field">
+                    <div class="field-label">Description</div>
+                    <div class="field-content">
+                        Find the top n customers based on some value (gross written premium).
+                    </div>
+                </div>
+
+                <div class="field">
+                    <div class="field-label">Conditions</div>
+                    <div class="field-content">
+                        Reg date 2024, main branch.
+                    </div>
+                </div>
+
+                <div class="field">
+                    <div class="field-label">Input</div>
+                    <div class="field-content">
+                        list the top 20 customers based on the total gross written premium, in 2024, the main branch, include all doc types.
+                    </div>
+                </div>
+
+                
+                <div class="field">
+                    <div class="field-label">Expected Results</div>
+                    <div class="table-container">
+                        <table style="font-size: 0.7em;">
+                            <thead>
+                              <tr>
+                                <th>Rank of Customer</th>
+                                <th>Insured Name</th>
+                                <th style="text-align:right;">Gross Written Premium (match to finance)</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td>1</td>
+                                <td>QatarEnergy LNG</td>
+                                <td style="text-align:right;">471,676,218</td>
+                              </tr>
+                              <tr>
+                                <td>2</td>
+                                <td>Qatar Airways Co.</td>
+                                <td style="text-align:right;">138,345,265</td>
+                              </tr>
+                              <tr>
+                                <td>3</td>
+                                <td>Qatar Aluminium Limited</td>
+                                <td style="text-align:right;">58,459,126</td>
+                              </tr>
+                              <tr>
+                                <td>4</td>
+                                <td>Dolphin Energy Limited</td>
+                                <td style="text-align:right;">32,157,363</td>
+                              </tr>
+                              <tr>
+                                <td>5</td>
+                                <td>Qatar Armed Forces</td>
+                                <td style="text-align:right;">31,811,057</td>
+                              </tr>
+                              <tr>
+                                <td>6</td>
+                                <td>Qatar Gen. Electricity &amp; Water Corp. (KAHRAMAA)</td>
+                                <td style="text-align:right;">27,433,977</td>
+                              </tr>
+                              <tr>
+                                <td>7</td>
+                                <td>McDermott Middle East, Inc., Qatar Branch</td>
+                                <td style="text-align:right;">27,028,224</td>
+                              </tr>
+                              <tr>
+                                <td>8</td>
+                                <td>Qatar Steel Company (Q.P.S.C)</td>
+                                <td style="text-align:right;">26,613,654</td>
+                              </tr>
+                              <tr>
+                                <td>9</td>
+                                <td>AL JAZEERA MEDIA NETWORK</td>
+                                <td style="text-align:right;">20,700,038</td>
+                              </tr>
+                              <tr>
+                                <td>10</td>
+                                <td>Amiri Yachts</td>
+                                <td style="text-align:right;">20,338,562</td>
+                              </tr>
+                            </tbody>
+                          </table>                          
+                    </div>
+                </div>
+
+                <div class="field">
+                    <div class="field-label">AI Results</div>
+                    <div class="ai-results" id="ai-result-6"></div>
+                </div>
+            </div>
+            <div class="test-footer">
+                <div class="footer-item">
+                    <div class="footer-label">Matched</div>
+                    <div class="footer-value"><span class="status-badge status-true">True</span></div>
+                </div>  
+                <div class="footer-item">
+                    <div class="footer-label">If False - Description</div>
+                    <div class="footer-value">None</div>
+                </div>
+                <div class="footer-item">
+                    <div class="footer-label">Which Try</div>
+                    <div class="footer-value">First Try</div>
+                </div>
+                <div class="footer-item">
+                    <div class="footer-label">Tested With</div>
+                    <div class="footer-value">Amala</div>
+                </div>
+                <div class="footer-item">
+                    <div class="footer-label">Tested From</div>
+                    <div class="footer-value">Yazeed</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- Test 7 -->
+        <div class="test-card">
+            <div class="test-header">
+                <span class="test-id">Test ID: 7</span>
+                <div class="report-name">Top Net Paid Claims (by Payment Date)</div>
+            </div>
+            <div class="test-body">
+                <div class="field">
+                    <div class="field-label">Description</div>
+                    <div class="field-content">
+                        Get the top policies based on the total net paid claims.
+                    </div>
+                </div>
+
+                <div class="field">
+                    <div class="field-label">Considerations</div>
+                    <div class="field-content">
+                        Line of business Group life, the payment year is 2024, main branch.
+                    </div>
+                </div>
+
+                <div class="field">
+                    <div class="field-label">Input</div>
+                    <div class="field-content">
+                        List the top 10 policies based on the net paid claim value, with Customer Name, Line of Business, Product(Minor), Branch, Office, Policy Number, Policy Year, total net paid claim value, the payment amount, and the payment recovery, the payment registration date is 2024, under the main branch, and the line of business is group life. Please show your answer in a table format.
+                    </div>
+                </div>
+
+                
+                <div class="field">
+                    <div class="field-label">Expected Results</div>
+                    <div class="table-container">
+                        <table style="font-size: 0.7em;">
+                            <thead>
+                                <tr>
+                                    <th>Rank of Net Paid Claim</th>
+                                    <th>Customer Name</th>
+                                    <th>Line of Business</th>
+                                    <th>Product</th>
+                                    <th>Branch Name</th>
+                                    <th>Office Name</th>
+                                    <th>Pol No</th>
+                                    <th>Pol Year</th>
+                                    <th>Net Paid Claim</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>AL JAZEERA MEDIA NETWORK</td>
+                                    <td>Group Life & Medical</td>
+                                    <td>Group Medical (DohaCare)</td>
+                                    <td>Main Branch</td>
+                                    <td>Head Office</td>
+                                    <td>58</td>
+                                    <td>2024</td>
+                                    <td style="text-align:right;">11,239,646</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>Qatar University</td>
+                                    <td>Group Life & Medical</td>
+                                    <td>Group Medical (DohaCare)</td>
+                                    <td>Main Branch</td>
+                                    <td>Head Office</td>
+                                    <td>35</td>
+                                    <td>2024</td>
+                                    <td style="text-align:right;">7,592,504</td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>AL JAZEERA MEDIA NETWORK</td>
+                                    <td>Group Life & Medical</td>
+                                    <td>Group Medical (DohaCare)</td>
+                                    <td>Main Branch</td>
+                                    <td>Head Office</td>
+                                    <td>61</td>
+                                    <td>2023</td>
+                                    <td style="text-align:right;">6,882,678</td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td>Ali Bin Ali Holding - Medical</td>
+                                    <td>Group Life & Medical</td>
+                                    <td>Group Medical (DohaCare)</td>
+                                    <td>Main Branch</td>
+                                    <td>Head Office</td>
+                                    <td>8</td>
+                                    <td>2024</td>
+                                    <td style="text-align:right;">6,481,598</td>
+                                </tr>
+                                <tr>
+                                    <td>5</td>
+                                    <td>Nasser Bin Khaled & Sons Holding Co.-MEDEX</td>
+                                    <td>Group Life & Medical</td>
+                                    <td>Group Medical (DohaCare)</td>
+                                    <td>Main Branch</td>
+                                    <td>Head Office</td>
+                                    <td>9</td>
+                                    <td>2024</td>
+                                    <td style="text-align:right;">4,318,575</td>
+                                </tr>
+                                <tr>
+                                    <td>6</td>
+                                    <td>Gulf Warehousing Company</td>
+                                    <td>Group Life & Medical</td>
+                                    <td>Group Medical (DohaCare)</td>
+                                    <td>Main Branch</td>
+                                    <td>Head Office</td>
+                                    <td>23</td>
+                                    <td>2023</td>
+                                    <td style="text-align:right;">3,655,180</td>
+                                </tr>
+                                <tr>
+                                    <td>7</td>
+                                    <td>Community College of Qatar</td>
+                                    <td>Group Life & Medical</td>
+                                    <td>Group Medical (DohaCare)</td>
+                                    <td>Main Branch</td>
+                                    <td>Head Office</td>
+                                    <td>80</td>
+                                    <td>2022</td>
+                                    <td style="text-align:right;">3,629,428</td>
+                                </tr>
+                                <tr>
+                                    <td>8</td>
+                                    <td>Amiri Diwan</td>
+                                    <td>Group Life & Medical</td>
+                                    <td>Group Medical (DohaCare)</td>
+                                    <td>Main Branch</td>
+                                    <td>Head Office</td>
+                                    <td>181</td>
+                                    <td>2023</td>
+                                    <td style="text-align:right;">3,377,931</td>
+                                </tr>
+                                <tr>
+                                    <td>9</td>
+                                    <td>Qatar Steel Company (Q.P.S.C)</td>
+                                    <td>Group Life & Medical</td>
+                                    <td>Group Life</td>
+                                    <td>Main Branch</td>
+                                    <td>Head Office</td>
+                                    <td>88</td>
+                                    <td>2021</td>
+                                    <td style="text-align:right;">3,228,015</td>
+                                </tr>
+                                <tr>
+                                    <td>10</td>
+                                    <td>Ali Bin Ali Holding - Medical</td>
+                                    <td>Group Life & Medical</td>
+                                    <td>Group Medical (DohaCare)</td>
+                                    <td>Main Branch</td>
+                                    <td>Head Office</td>
+                                    <td>35</td>
+                                    <td>2023</td>
+                                    <td style="text-align:right;">3,150,991</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <div class="field-label">AI Results</div>
+                    <div class="ai-results" id="ai-result-7"></div>
+                </div>
+            </div>
+            <div class="test-footer">
+                <div class="footer-item">
+                    <div class="footer-label">Matched</div>
+                    <div class="footer-value"><span class="status-badge status-correct">Correct</span></div>
+                </div>  
+                <div class="footer-item">
+                    <div class="footer-label">If False - Description</div>
+                    <div class="footer-value">None</div>
+                </div>
+                <div class="footer-item">
+                    <div class="footer-label">Which Try</div>
+                    <div class="footer-value">First Try</div>
+                </div>
+                <div class="footer-item">
+                    <div class="footer-label">Tested With</div>
+                    <div class="footer-value">Amala</div>
+                </div>
+                <div class="footer-item">
+                    <div class="footer-label">Tested From</div>
+                    <div class="footer-value">Yazeed</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="divider">        </div>
+
+        <div class="divider"></div>
+
+        <!-- Test 8 -->
+        <div class="test-card">
+            <div class="test-header">
+                <span class="test-id">Test ID: 8</span>
+                <div class="report-name">Top Incurred Claims (by Claim Registration Date)</div>
+            </div>
+            <div class="test-body">
+                <div class="field">
+                    <div class="field-label">Description</div>
+                    <div class="field-content">
+                        Top n claims based on the claim registration date.
+                    </div>
+                </div>
+
+                <div class="field">
+                    <div class="field-label">Considerations</div>
+                    <div class="field-content">
+                        Claim Registration date 2024, Main Branch.
+                    </div>
+                </div>
+
+                <div class="field">
+                    <div class="field-label">Input</div>
+                    <div class="field-content">
+                        List the top 10 policies based on the total claim value, with Customer Name, Line of Business, Product(Minor), Branch, Office, Policy Number, Policy Year, total claim value, the claim registration date is 2024, under the main branch.
+                    </div>
+                </div>
+
+                
+                <div class="field">
+                    <div class="field-label">Expected Results</div>
+                    <div class="table-container">
+                        <table style="font-size: 0.7em;">
+                            <thead>
+                                <tr>
+                                    <th>Rank of Incurred Claims (Paid +OS -Recovery)</th>
+                                    <th>Customer Name</th>
+                                    <th>Line of Business</th>
+                                    <th>Product</th>
+                                    <th>Branch Name</th>
+                                    <th>Office Name</th>
+                                    <th>Pol No</th>
+                                    <th>Pol Year</th>
+                                    <th>Incurred Claims (Paid +OS -Recovery)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>Darwish Trading co and DMEC QCC DEC DPIS Arabesque GT and GALCO</td>
+                                    <td>Fire</td>
+                                    <td>Fire</td>
+                                    <td>Main Branch</td>
+                                    <td>Head Office</td>
+                                    <td>48</td>
+                                    <td>2023</td>
+                                    <td style="text-align:right;">21,500,000</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>AL JAZEERA MEDIA NETWORK</td>
+                                    <td>Group Life & Medical</td>
+                                    <td>Group Medical (DohaCare)</td>
+                                    <td>Main Branch</td>
+                                    <td>Head Office</td>
+                                    <td>58</td>
+                                    <td>2024</td>
+                                    <td style="text-align:right;">11,239,646</td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>Abu Dhabi Airports Company PJSC (ADAC)</td>
+                                    <td>Fire</td>
+                                    <td>Property All Risk</td>
+                                    <td>Main Branch</td>
+                                    <td>Head Office</td>
+                                    <td>490</td>
+                                    <td>2024</td>
+                                    <td style="text-align:right;">10,214,733</td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td>ASPIRE ZONE FOUNDATION</td>
+                                    <td>Fire</td>
+                                    <td>Property All Risk</td>
+                                    <td>Main Branch</td>
+                                    <td>Head Office</td>
+                                    <td>494</td>
+                                    <td>2023</td>
+                                    <td style="text-align:right;">7,858,470</td>
+                                </tr>
+                                <tr>
+                                    <td>5</td>
+                                    <td>Qatar University</td>
+                                    <td>Group Life & Medical</td>
+                                    <td>Group Medical (DohaCare)</td>
+                                    <td>Main Branch</td>
+                                    <td>Head Office</td>
+                                    <td>35</td>
+                                    <td>2024</td>
+                                    <td style="text-align:right;">7,592,504</td>
+                                </tr>
+                                <tr>
+                                    <td>6</td>
+                                    <td>AL JAZEERA MEDIA NETWORK</td>
+                                    <td>Group Life & Medical</td>
+                                    <td>Group Medical (DohaCare)</td>
+                                    <td>Main Branch</td>
+                                    <td>Head Office</td>
+                                    <td>61</td>
+                                    <td>2023</td>
+                                    <td style="text-align:right;">6,882,678</td>
+                                </tr>
+                                <tr>
+                                    <td>7</td>
+                                    <td>Ali Bin Ali Holding - Medical</td>
+                                    <td>Group Life & Medical</td>
+                                    <td>Group Medical (DohaCare)</td>
+                                    <td>Main Branch</td>
+                                    <td>Head Office</td>
+                                    <td>8</td>
+                                    <td>2024</td>
+                                    <td style="text-align:right;">6,481,598</td>
+                                </tr>
+                                <tr>
+                                    <td>8</td>
+                                    <td>Consolidated Engineering Construction Co. W.L.L. (Qatar)</td>
+                                    <td>Marine Cargo</td>
+                                    <td>Marine Cargo (Individual Policy)</td>
+                                    <td>Main Branch</td>
+                                    <td>Head Office</td>
+                                    <td>741</td>
+                                    <td>2024</td>
+                                    <td style="text-align:right;">4,899,609</td>
+                                </tr>
+                                <tr>
+                                    <td>9</td>
+                                    <td>Internal Media Services C/O Qatar Airways</td>
+                                    <td>Fire</td>
+                                    <td>Property All Risk</td>
+                                    <td>Main Branch</td>
+                                    <td>Head Office</td>
+                                    <td>334</td>
+                                    <td>2024</td>
+                                    <td style="text-align:right;">4,750,000</td>
+                                </tr>
+                                <tr>
+                                    <td>10</td>
+                                    <td>Nasser Bin Khaled & Sons Holding Co.-MEDEX</td>
+                                    <td>Group Life & Medical</td>
+                                    <td>Group Medical (DohaCare)</td>
+                                    <td>Main Branch</td>
+                                    <td>Head Office</td>
+                                    <td>9</td>
+                                    <td>2024</td>
+                                    <td style="text-align:right;">4,368,575</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <div class="field-label">AI Results</div>
+                    <div class="ai-results" id="ai-result-8"></div>
+                </div>
+            </div>
+            <div class="test-footer">
+                <div class="footer-item">
+                    <div class="footer-label">Matched</div>
+                    <div class="footer-value"><span class="status-badge status-correct">Correct</span></div>
+                </div>  
+                <div class="footer-item">
+                    <div class="footer-label">If False - Description</div>
+                    <div class="footer-value">None</div>
+                </div>
+                <div class="footer-item">
+                    <div class="footer-label">Which Try</div>
+                    <div class="footer-value">First Try</div>
+                </div>
+                <div class="footer-item">
+                    <div class="footer-label">Tested With</div>
+                    <div class="footer-value">Amala</div>
+                </div>
+                <div class="footer-item">
+                    <div class="footer-label">Tested From</div>
+                    <div class="footer-value">Yazeed</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
         <div class="test-card">
             <div class="test-header">
                 <span class="test-id">Test ID: n</span>
@@ -2034,14 +2798,136 @@ Here is the breakdown for each policy:
 
 The data for Ezdan Holding Group's Group Life & Medical policies shows a varied performance over the years. While 2019 and 2020 policies had favorable loss ratios (77.05% and 50.82% respectively), indicating strong underwriting results, the policies from 2021, 2022, and 2023 experienced loss ratios significantly above 100% (123.02%, 119.81%, and 118.72% respectively). This indicates that for these years, the total claims paid exceeded the premiums earned, suggesting a period of higher claims frequency or severity. The policies for 2025 are new and currently show no claims activity, which is typical for recently issued policies. The recurring QAR 0.00 Sum Insured for policies in 2021 and 2022 warrants further investigation to understand the specific policy structure or data recording practices for these years.`;
 
-        const aiResult5 = `Write here the AI results for the test.`;
+        const aiResult5 = `
+    
+**Business Context and Interpretation:**
+
+*   **Customer and Policy:** The data pertains to **Ezdan Holding Group** (Customer Code: 8000115009), under a 'GROUP LIFE & MEDICAL' policy, specifically the 'Group Medical (DohaCare)' minor type. This indicates a corporate insurance policy providing medical coverage to a group, likely employees.
+*   **Policy Year and Type:** All claims are associated with **Policy Number 86** for the **2023 Policy Year**. The 'BUSINESS_TYPE' is 'DIRECT', meaning the policy was issued directly by the insurer to the customer.
+*   **Claim Status:** All six claims listed are currently in a **'Close' status**. This means that the assessment and payment (or rejection) process for these claims has been completed.
+*   **Claim Dates:**
+    *   The **Claim Accident Dates** range from April 2023 to March 2024, indicating accidents or medical events occurring within and slightly beyond the policy year.
+    *   The **Claim Registration Dates** mostly fall in 2024, even for claims with accident dates in 2023. This highlights a time lag between the actual event (accident date) and when the claim was officially submitted and recorded by the insurer (registration date). For instance, Claim Number 5327 had an accident in September 2023 but was registered in July 2024.
+    *   The **Claim Accident Year** shows two claims with accident dates in 2023 and four claims with accident dates in 2024, even though they are all linked to a 2023 policy year. This is common in insurance, as claims for events near the end of a policy period can be registered and processed in the subsequent calendar year.
+*   **Total Claim Amounts:** The individual total claim amounts vary significantly, from QAR 8,464.63 to QAR 786,423.11. These amounts represent the final aggregated payout for each specific claim.
+
+**Key Insights:**
+
+*   **Significant Medical Expenditure:** For Policy Number 86, which commenced in 2023, the total paid claims for Ezdan Holding Group amount to **QAR 1,343,775.51**. This indicates substantial utilization of the Group Medical policy.
+*   **Claim Lag:** There is a noticeable delay between the accident date and the claim registration date for several claims, with some 2023 accidents only being registered in 2024. This could be due to the nature of medical claims (e.g., ongoing treatment, delayed submission of documents) or internal processing timelines.
+*   **Policy Coverage Across Years:** While the policy year is 2023, claims with accident dates in 2024 are still linked to this policy, demonstrating that coverage extends to events occurring while the policy was active, even if the processing or the event itself falls into the subsequent calendar year.
+
+**Summary of Key Findings:**
+
+For Ezdan Holding Group (8000115009) under their 2023 Group Life & Medical (Group Medical - DohaCare) policy (Policy Number 86), a total of **QAR 1,343,775.51** has been paid out across six closed claims. These claims reflect various medical events, with some incidents occurring in 2023 and others in 2024, highlighting the operational aspects of claim processing and policy coverage across annual cycles.`;
         
         const aiResultn = `Write here the AI results for the test.`;
-        
+
+        const aiResult6 = `
+        **Top 20 Customers by Total Gross Written Premium (2024):**
+
+1.  **QatarEnergy LNG:** QAR 471,676,217.52
+2.  **Qatar Airways Co.:** QAR 138,345,264.84
+3.  **Qatar Aluminium Limited:** QAR 58,459,125.81
+4.  **Dolphin Energy Limited:** QAR 32,157,363.26
+5.  **Qatar Armed Forces:** QAR 31,811,056.79
+6.  **Qatar Gen. Electricity & Water Corp. (KAHRAMAA):** QAR 27,433,977.00
+7.  **McDermott Middle East, Inc., Qatar Branch:** QAR 27,028,224.35
+8.  **Qatar Steel Company (Q.P.S.C):** QAR 26,613,653.90
+9.  **AL JAZEERA MEDIA NETWORK:** QAR 20,700,037.60
+10. **Amiri Yachts:** QAR 20,338,562.32
+11. **Qatar Energy:** QAR 19,080,700.51
+12. **QATAR LIQUEFIED GAS COMPANY LTD:** QAR 14,216,938.63
+13. **Qatar Shipyard Technology Solutions:** QAR 11,838,786.97
+14. **Ali Bin Ali Holding - Medical:** QAR 11,617,757.00
+15. **Qatar Petrochemical Co. (QAPCO):** QAR 10,198,526.29
+16. **Ras Girtas Power Company:** QAR 10,073,015.73
+17. **QATAR ARMY FORCES:** QAR 9,828,138.81
+18. **Qatar University:** QAR 9,439,048.18
+19. **Gulf Helicopters:** QAR 8,781,300.00
+20. **Imar Trading & Contracting Co. WLL:** QAR 8,347,131.78
+
+**Key Insights:**
+
+*   **Dominance of Energy Sector:** QatarEnergy LNG stands out significantly as the top customer, contributing over QAR 471 million in GWP, highlighting the substantial insurance needs of the energy sector. Other energy-related entities like Dolphin Energy Limited, Qatar Energy, QATAR LIQUEFIED GAS COMPANY LTD, and Qatar Petrochemical Co. (QAPCO) also feature prominently.
+*   **Diverse Portfolio:** While energy dominates, the list includes a diverse range of industries such as aviation (Qatar Airways Co.), manufacturing (Qatar Aluminium Limited, Qatar Steel Company), defense (Qatar Armed Forces, QATAR ARMY FORCES), media (AL JAZEERA MEDIA NETWORK), and utilities (KAHRAMAA), indicating a broad customer base for the main branch.
+*   **Significant Concentration at the Top:** The top customer, QatarEnergy LNG, accounts for a substantial portion of the total GWP among the top 20, demonstrating a high concentration of premium volume from a single entity. The premium for the top customer is more than three times that of the second-ranked customer.
+*   **Strategic Importance of Large Clients:** The substantial GWP from these top clients underscores their strategic importance to the insurer's financial health and market position.
+
+**Summary of Key Findings:**
+
+In 2024, the top 20 customers of the main branch generated a combined gross written premium of over QAR 955 million. The energy sector, led by QatarEnergy LNG, is the primary driver of premium income, followed by aviation and heavy industries. This diverse yet top-heavy client list highlights the insurer's strong relationships with major entities across critical sectors in the region.
+        `;
+
+        const aiResult7 = `Below is the detailed list of policies:
+
+| Customer Name                         | Line of Business     | Product (Minor)           | Branch        | Office      | Policy Number | Policy Year | Total Net Paid Claim Value | Total Payment Amount | Total Payment Recovery |
+| :------------------------------------ | :------------------- | :------------------------ | :------------ | :---------- | :------------ | :---------- | :------------------------- | :------------------- | :--------------------- |
+| AL JAZEERA MEDIA NETWORK              | GROUP LIFE & MEDICAL | Group Medical (DohaCare)  | Main Branch   | Head Office | 58            | 2024        | QAR 11,239,646.04          | QAR 11,239,646.04    | QAR 0.00               |
+| Qatar University                      | GROUP LIFE & MEDICAL | Group Medical (DohaCare)  | Main Branch   | Head Office | 35            | 2024        | QAR 7,592,504.27           | QAR 7,592,504.27     | QAR 0.00               |
+| AL JAZEERA MEDIA NETWORK              | GROUP LIFE & MEDICAL | Group Medical (DohaCare)  | Main Branch   | Head Office | 61            | 2023        | QAR 6,882,677.80           | QAR 6,882,677.80     | QAR 0.00               |
+| Ali Bin Ali Holding - Medical         | GROUP LIFE & MEDICAL | Group Medical (DohaCare)  | Main Branch   | Head Office | 8             | 2024        | QAR 6,481,597.61           | QAR 6,619,678.39     | QAR 138,080.78         |
+| Nasser Bin Khaled & Sons Holding Co.-MEDEX | GROUP LIFE & MEDICAL | Group Medical (DohaCare)  | Main Branch   | Head Office | 9             | 2024        | QAR 4,318,574.67           | QAR 4,318,574.67     | QAR 0.00               |
+| Gulf Warehousing Company              | GROUP LIFE & MEDICAL | Group Medical (DohaCare)  | Main Branch   | Head Office | 23            | 2023        | QAR 3,655,180.49           | QAR 3,657,737.99     | QAR 2,557.50           |
+| Community College of Qatar            | GROUP LIFE & MEDICAL | Group Medical (DohaCare)  | Main Branch   | Head Office | 80            | 2022        | QAR 3,629,427.70           | QAR 3,629,427.70     | QAR 0.00               |
+| Amiri Diwan                           | GROUP LIFE & MEDICAL | Group Medical (DohaCare)  | Main Branch   | Head Office | 181           | 2023        | QAR 3,377,931.34           | QAR 3,377,931.34     | QAR 0.00               |
+| Qatar Steel Company (Q.P.S.C)         | GROUP LIFE & MEDICAL | Group Life                | Main Branch   | Head Office | 88            | 2021        | QAR 3,228,015.15           | QAR 3,228,015.15     | QAR 0.00               |
+| Ali Bin Ali Holding - Medical         | GROUP LIFE & MEDICAL | Group Medical (DohaCare)  | Main Branch   | Head Office | 35            | 2023        | QAR 3,150,991.44           | QAR 3,150,991.44     | QAR 0.00               |
+
+**Business Context and Insights:**
+
+*   **Net Paid Claim Value:** This metric represents the actual cost incurred by the insurer for claims after accounting for any recoveries. It is calculated as \`Total Payment Amount - Total Payment Recovery\`. A higher net paid claim value indicates a greater financial outlay by the insurer for that policy.
+*   **Dominance of Group Medical:** The vast majority of the top policies listed fall under 'Group Medical (DohaCare)' within the 'GROUP LIFE & MEDICAL' line of business. This suggests that group medical claims contribute significantly to the overall net paid claim values within the Main Branch.
+*   **Specific Group Life Policy:** Only one policy, from Qatar Steel Company (Q.P.S.C) (Policy Number 88), explicitly shows 'Group Life' as its minor product, with a net paid claim value of QAR 3,228,015.15. This policy dates back to 2021.
+*   **Top Contributors:** AL JAZEERA MEDIA NETWORK holds the top two positions, with policies in 2024 and 2023, demonstrating substantial claim activity. Qatar University also shows a high net paid claim value for a 2024 policy.
+*   **Payment Recoveries:** Most policies show a 'Total Payment Recovery' of QAR 0.00, meaning the full payment amount was the net claim. However, two policies, Ali Bin Ali Holding - Medical (Policy 8, 2024) and Gulf Warehousing Company (Policy 23, 2023), show significant recoveries of QAR 138,080.78 and QAR 2,557.50 respectively. Recoveries can result from various reasons, such as subrogation, overpayment corrections, or third-party reimbursements, effectively reducing the insurer's final payout.
+*   **Policy Year Distribution:** The policies span several years, with five from 2024, four from 2023, one from 2022, and one from 2021. This indicates that high-value claims are not restricted to the current year's policies but can also originate from older, active policies.
+
+**Summary of Key Findings:**
+
+The top 10 policies by net paid claim value from the Main Branch are largely driven by Group Medical insurance, with AL JAZEERA MEDIA NETWORK and Qatar University being major contributors. While the request focused on Group Life and 2024 payment dates, the data indicates a broader scope of 'GROUP LIFE & MEDICAL' policies from 2021-2024. Payment recoveries are present in a few instances, reducing the net claim payout for those policies.`;
+
+        const aiResult8 = `
+        These policies represent significant claim payouts, highlighting areas of high financial impact within the Main Branch's portfolio. The data is presented below:
+
+| Rank | Customer Name                                                  | Line of Business     | Product (Minor)                  | Policy Number | Policy Year | Total Claim Value |
+| :--- | :------------------------------------------------------------- | :------------------- | :------------------------------- | :------------ | :---------- | :---------------- |
+| 1    | Darwish Trading co and DMEC QCC DEC DPIS Arabesque GT and GALCO | Fire                 | Fire                             | 48            | 2023        | QAR 21,500,000.00 |
+| 2    | AL JAZEERA MEDIA NETWORK                                       | GROUP LIFE & MEDICAL | Group Medical (DohaCare)         | 58            | 2024        | QAR 11,239,646.04 |
+| 3    | Abu Dhabi Airports Company PJSC (ADAC)                         | Fire                 | Property All Risk                | 490           | 2024        | QAR 10,214,733.00 |
+| 4    | ASPIRE ZONE FOUNDATION                                         | Fire                 | Property All Risk                | 494           | 2023        | QAR 7,858,470.41  |
+| 5    | Qatar University                                               | GROUP LIFE & MEDICAL | Group Medical (DohaCare)         | 35            | 2024        | QAR 7,592,504.27  |
+| 6    | AL JAZEERA MEDIA NETWORK                                       | GROUP LIFE & MEDICAL | Group Medical (DohaCare)         | 61            | 2023        | QAR 6,882,677.80  |
+| 7    | Ali Bin Ali Holding - Medical                                  | GROUP LIFE & MEDICAL | Group Medical (DohaCare)         | 8             | 2024        | QAR 6,481,597.61  |
+| 8    | Consolidated Engineering Construction Co. W.L.L. (Qatar)       | Marine Cargo         | Marine Cargo (Individual Policy) | 741           | 2024        | QAR 4,899,609.00  |
+| 9    | Internal Media Services C/O Qatar Airways                      | Fire                 | Property All Risk                | 334           | 2024        | QAR 4,750,000.00  |
+| 10   | Nasser Bin Khaled & Sons Holding Co.-MEDEX                     | GROUP LIFE & MEDICAL | Group Medical (DohaCare)         | 9             | 2024        | QAR 4,368,574.67  |
+
+*Note: All policies are under the 'Main Branch' and 'Head Office'. The 'Total Claim Value' represents the sum of claims registered in 2024 for each respective policy. The 'Policy Year' column indicates the inception year of the policy itself.*
+
+**Business Context and Interpretation:**
+
+The list highlights policies that have incurred the highest claim values during 2024 within the Main Branch. This information is crucial for understanding risk exposure, claims management effectiveness, and potential profitability of different insurance products and customer segments.
+
+*   **Significant Claim Amounts:** The top policy alone accounts for QAR 21.5 million in claims, indicating a major event or accumulation of claims under that policy. The total for the top 10 policies exceeds QAR 85 million.
+*   **Dominant Lines of Business:** "Fire" and "GROUP LIFE & MEDICAL" are the most prominent lines of business, accounting for 4 and 5 policies respectively in this top 10 list. This suggests these areas are significant for large claim payouts.
+    *   **Fire/Property All Risk:** High claim values in Fire and Property All Risk often indicate significant property damage or loss events, which can be catastrophic in nature.
+    *   **Group Life & Medical:** Consistent high claim values in Group Medical policies, such as "Group Medical (DohaCare)", are typical for large corporate clients due to the high volume of medical services utilized by a large insured population.
+*   **Key Customers:** Customers like "Darwish Trading co and DMEC QCC DEC DPIS Arabesque GT and GALCO", "AL JAZEERA MEDIA NETWORK", "Abu Dhabi Airports Company PJSC (ADAC)", and "ASPIRE ZONE FOUNDATION" appear with very high claim values, indicating their policies are major contributors to overall claim expenses. "AL JAZEERA MEDIA NETWORK" appears twice, with different policy numbers, highlighting its significant insurance footprint.
+*   **Policy Year vs. Claim Registration Date:** It's important to distinguish between the 'Policy Year' (when the policy was issued) and the 'claim registration date' (when the claim was reported/registered). The listed 'Total Claim Value' specifically pertains to claims registered in 2024, regardless of the policy's inception year. For instance, Policy Number 48 (Darwish Trading) was issued in 2023 but had the highest claim value from claims registered in 2024.
+
+**Summary of Key Findings:**
+
+The analysis of claims registered in 2024 for the Main Branch reveals that the top 10 policies have generated over QAR 85 million in total claim value. The "Fire" and "GROUP LIFE & MEDICAL" lines of business are the primary drivers of these high claim figures, with several large corporate customers contributing significantly. This data provides valuable insights into the financial impact of claims within the Main Branch, indicating areas that may require closer monitoring for risk management and claims processing efficiency.
+        `;
+
         document.getElementById('ai-result-1').innerHTML = parseMarkdown(aiResult1);
         document.getElementById('ai-result-3').innerHTML = parseMarkdown(aiResult3);
         document.getElementById('ai-result-4').innerHTML = parseMarkdown(aiResult4);
         document.getElementById('ai-result-5').innerHTML = parseMarkdown(aiResult5);
+        document.getElementById('ai-result-6').innerHTML = parseMarkdown(aiResult6);
+        document.getElementById('ai-result-7').innerHTML = parseMarkdown(aiResult7);
+        document.getElementById('ai-result-8').innerHTML = parseMarkdown(aiResult8)
         document.getElementById('ai-result-n').innerHTML = parseMarkdown(aiResultn);
     </script>
 </body>
