@@ -45,7 +45,7 @@ def load_aims_domain_knowledge():
                            "Fleet Coverage", "Orange Card", "Personal Accident Benefits (P.A.B)"],
                 "specialized": "Doha Warranties (Mercedes, Toyota, Mitsubishi, ISUZU brands)"
             },
-            "Group Life & Medical": {
+            "GROUP LIFE & MEDICAL": {
                 "branches": ["All branches except Mena Re Underwriters"],
                 "products": ["Group Life", "Group Medical (DohaCare, IG, AY)", "Individual Medical",
                            "Travel Insurance", "Group Credit Life", "BUPA Plans", "Medical Reimbursement", 

@@ -1,0 +1,2048 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>K2 Insurance AI Assistant - Test Results</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .test-card {
+            margin: 30px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .test-header {
+            background: #f8f9fa;
+            padding: 20px;
+            border-bottom: 3px solid #667eea;
+        }
+
+        .test-id {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .report-name {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .test-body {
+            padding: 20px;
+        }
+
+        .field {
+            margin-bottom: 20px;
+        }
+
+        .field-label {
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 5px;
+            font-size: 1.1em;
+        }
+
+        .field-content {
+            color: #555;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 5px;
+            border-left: 4px solid #667eea;
+        }
+
+        .table-container {
+            overflow-x: auto;
+            margin: 10px 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            font-size: 0.9em;
+        }
+
+        th {
+            background: #667eea;
+            color: white;
+            padding: 12px 8px;
+            text-align: left;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        td {
+            padding: 10px 8px;
+            border-bottom: 1px solid #e0e0e0;
+            color: #333;
+        }
+
+        tr:hover {
+            background: #f8f9fa;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        .grand-total {
+            background: #f0f0f0 !important;
+            font-weight: bold;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-weight: bold;
+            font-size: 0.9em;
+        }
+
+        .status-true {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .status-correct {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .status-false {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .test-footer {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .footer-item {
+            padding: 10px;
+            background: white;
+            border-radius: 5px;
+            border-left: 3px solid #667eea;
+        }
+
+        .footer-label {
+            font-size: 0.85em;
+            color: #888;
+            margin-bottom: 3px;
+        }
+
+        .footer-value {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .divider {
+            height: 2px;
+            background: linear-gradient(to right, transparent, #667eea, transparent);
+            margin: 40px 30px;
+        }
+
+        .ai-results {
+            background: #fff9e6;
+            padding: 15px;
+            border-radius: 5px;
+            border-left: 4px solid #ffc107;
+        }
+
+        .ai-results ul {
+            margin-left: 20px;
+            margin-top: 10px;
+        }
+
+        .ai-results li {
+            margin-bottom: 8px;
+        }
+
+        .ai-results h3 {
+            color: #333;
+            margin-top: 15px;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+
+        .ai-results p {
+            margin-bottom: 10px;
+        }
+
+        .ai-results strong {
+            color: #333;
+            font-weight: 600;
+        }
+
+        .ai-results table {
+            margin: 15px 0;
+            font-size: 0.85em;
+        }
+
+        .ai-results em {
+            font-style: italic;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>K2 Insurance AI Assistant</h1>
+            <p>Test Results Documentation</p>
+        </div>
+
+        <!-- Test 1 -->
+        <div class="test-card">
+            <div class="test-header">
+                <span class="test-id">Test ID: 1</span>
+                <div class="report-name">Agent-Summary</div>
+            </div>
+            <div class="test-body">
+                <div class="field">
+                    <div class="field-label">Description</div>
+                    <div class="field-content">
+                        Production for broker (agent) - By giving the consideration, we want to ask about premium, paid commission, total claims, sum insured, loss ratio, and the number of policies.
+                    </div>
+                </div>
+
+                <div class="field">
+                    <div class="field-label">Conditions</div>
+                    <div class="field-content">
+                        The Reg_date 2024 - Broker Name Al Afaq - The branch is the Main Branch
+                    </div>
+                </div>
+
+                <div class="field">
+                    <div class="field-label">Input</div>
+                    <div class="field-content">
+                        the broker is al afaq, the year is 2024 and the branch is the main branch, could you please provide me with the premium, paid commission, total claims, sum insured, loss ratio, and the number of policies, for this broker
+                    </div>
+                </div>
+
+                
+                <div class="field">
+                    <div class="field-label">Expected Results</div>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Agent Name</th>
+                                    <th>Premium</th>
+                                    <th>Gross Written Premium</th>
+                                    <th>NEP</th>
+                                    <th>UPR</th>
+                                    <th>Net Premium (Motor)</th>
+                                    <th>Paid Commission</th>
+                                    <th>Paid Claims</th>
+                                    <th>Outstanding Value</th>
+                                    <th>Payment Recovery</th>
+                                    <th>Incurred Claims</th>
+                                    <th>Sum Insured</th>
+                                    <th>Loss Ratio</th>
+                                    <th>Earned Loss Ratio</th>
+                                    <th>No:of Policies</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Al Afaq Insurance Brokers</td>
+                                    <td>1,124,856</td>
+                                    <td>1,124,856</td>
+                                    <td>1,118,916</td>
+                                    <td>5,940</td>
+                                    <td>932,881</td>
+                                    <td>191,974</td>
+                                    <td>177,767</td>
+                                    <td>11,930</td>
+                                    <td>0</td>
+                                    <td>189,697</td>
+                                    <td>171,836,379</td>
+                                    <td>16.86%</td>
+                                    <td>16.95%</td>
+                                    <td>129</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <div class="field-label">AI Results</div>
+                    <div class="ai-results" id="ai-result-1"></div>
+                </div>
+            </div>
+            <div class="test-footer">
+                <div class="footer-item">
+                    <div class="footer-label">Matched</div>
+                    <div class="footer-value"><span class="status-badge status-true">True</span></div>
+                </div>
+                <div class="footer-item">
+                    <div class="footer-label">If False - Description</div>
+                    <div class="footer-value">None</div>
+                </div>
+                <div class="footer-item">
+                    <div class="footer-label">Which Try</div>
+                    <div class="footer-value">First Try</div>
+                </div>
+                <div class="footer-item">
+                    <div class="footer-label">Tested With</div>
+                    <div class="footer-value">Amala</div>
+                </div>
+                <div class="footer-item">
+                    <div class="footer-label">Tested From</div>
+                    <div class="footer-value">Yazeed</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- Test 2 -->
+        <div class="test-card">
+            <div class="test-header">
+                <span class="test-id">Test ID: 2</span>
+                <div class="report-name">Agents & Productwise Summary</div>
+            </div>
+            <div class="test-body">
+                <div class="field">
+                    <div class="field-label">Description</div>
+                    <div class="field-content">
+                        Displaying the premium, paid commission, sum insured, total claims, loss ratio, and the number of policies, as a product-wise (minor-wise) for a specific broker.
+                    </div>
+                </div>
+
+                <div class="field">
+                    <div class="field-label">Conditions</div>
+                    <div class="field-content">
+                        The Reg_date 2024 - Broker Name Al Afaq - The branch is the Main Branch
+                    </div>
+                </div>
+
+                <div class="field">
+                    <div class="field-label">Input</div>
+                    <div class="field-content">
+                        please display the premium, paid commission, sum insured, total claims, loss ratio, and the number of policies, as a product-wise (minor-wise) for the broker called al afaq, in 2024 and the branch is the main branch. Show your answer as a table filled with these values for each minor as a hierarchy.
+                    </div>
+                </div>
+
+                <div class="field">
+                    <div class="field-label">Expected Results</div>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Agent Name</th>
+                                    <th>Product (group)</th>
+                                    <th>Premium</th>
+                                    <th>GWP</th>
+                                    <th>NEP</th>
+                                    <th>UPR</th>
+                                    <th>Net Premium</th>
+                                    <th>Paid Commission</th>
+                                    <th>Paid Claims</th>
+                                    <th>Outstanding Value</th>
+                                    <th>Payment Recovery</th>
+                                    <th>Incurred Claims</th>
+                                    <th>Sum Insured</th>
+                                    <th>Loss Ratio</th>
+                                    <th>Earned Loss Ratio</th>
+                                    <th>No:of Transactions</th>
+                                    <th>No:of Policies</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Al Afaq Insurance Brokers</td>
+                                    <td>Comprehensive</td>
+                                    <td>53,923</td>
+                                    <td>53,923</td>
+                                    <td>52,632</td>
+                                    <td>1,291</td>
+                                    <td>45,880</td>
+                                    <td>8,043</td>
+                                    <td>17,452</td>
+                                    <td>11,930</td>
+                                    <td>0</td>
+                                    <td>29,382</td>
+                                    <td>1,686,700</td>
+                                    <td>54.49%</td>
+                                    <td>55.83%</td>
+                                    <td>53</td>
+                                    <td>44</td>
+                                </tr>
+                                <tr>
+                                    <td>Al Afaq Insurance Brokers</td>
+                                    <td>Contractors All Risks</td>
+                                    <td>498,974</td>
+                                    <td>498,974</td>
+                                    <td>498,974</td>
+                                    <td>0</td>
+                                    <td>399,179</td>
+                                    <td>99,795</td>
+                                    <td></td>
+                                    <td>0</td>
+                                    <td></td>
+                                    <td>0</td>
+                                    <td>83,021,192</td>
+                                    <td>0.00%</td>
+                                    <td>0.00%</td>
+                                    <td>2</td>
+                                    <td>1</td>
+                                </tr>
+                                <tr>
+                                    <td>Al Afaq Insurance Brokers</td>
+                                    <td>Contractors Plant & Machinery</td>
+                                    <td>29,484</td>
+                                    <td>29,484</td>
+                                    <td>26,172</td>
+                                    <td>3,312</td>
+                                    <td>23,587</td>
+                                    <td>5,897</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>0</td>
+                                    <td>163,282</td>
+                                    <td>0.00%</td>
+                                    <td>0.00%</td>
+                                    <td>1</td>
+                                    <td>1</td>
+                                </tr>
+                                <tr>
+                                    <td>Al Afaq Insurance Brokers</td>
+                                    <td>Erection All Risks</td>
+                                    <td>2,500</td>
+                                    <td>2,500</td>
+                                    <td>2,500</td>
+                                    <td>0</td>
+                                    <td>2,000</td>
+                                    <td>500</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>0</td>
+                                    <td>1,329,678</td>
+                                    <td>0.00%</td>
+                                    <td>0.00%</td>
+                                    <td>1</td>
+                                    <td>1</td>
+                                </tr>
+                                <tr>
+                                    <td>Al Afaq Insurance Brokers</td>
+                                    <td>Group Life</td>
+                                    <td>3,715</td>
+                                    <td>3,715</td>
+                                    <td>3,715</td>
+                                    <td>0</td>
+                                    <td>2,901</td>
+                                    <td>814</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>0</td>
+                                    <td>45,650,000</td>
+                                    <td>0.00%</td>
+                                    <td>0.00%</td>
+                                    <td>4</td>
+                                    <td>0</td>
+                                </tr>
+                                <tr>
+                                    <td>Al Afaq Insurance Brokers</td>
+                                    <td>Group Medical (DohaCare)</td>
+                                    <td>369,391</td>
+                                    <td>369,391</td>
+                                    <td>369,391</td>
+                                    <td>0</td>
+                                    <td>320,724</td>
+                                    <td>48,667</td>
+                                    <td>121,724</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>121,724</td>
+                                    <td>22,500,000</td>
+                                    <td>32.95%</td>
+                                    <td>32.95%</td>
+                                    <td>4</td>
+                                    <td>2</td>
+                                </tr>
+                                <tr>
+                                    <td>Al Afaq Insurance Brokers</td>
+                                    <td>Individual Medical (DohaCare)</td>
+                                    <td>825</td>
+                                    <td>825</td>
+                                    <td>825</td>
+                                    <td>0</td>
+                                    <td>743</td>
+                                    <td>83</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>0</td>
+                                    <td>100,000</td>
+                                    <td>0.00%</td>
+                                    <td>0.00%</td>
+                                    <td>1</td>
+                                    <td>1</td>
+                                </tr>
+                                <tr>
+                                    <td>Al Afaq Insurance Brokers</td>
+                                    <td>Professional Indemnity</td>
+                                    <td>99,099</td>
+                                    <td>99,099</td>
+                                    <td>99,099</td>
+                                    <td>0</td>
+                                    <td>79,417</td>
+                                    <td>19,682</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>0</td>
+                                    <td>250,000</td>
+                                    <td>0.00%</td>
+                                    <td>0.00%</td>
+                                    <td>2</td>
+                                    <td>1</td>
+                                </tr>
+                                <tr>
+                                    <td>Al Afaq Insurance Brokers</td>
+                                    <td>Property All Risk</td>
+                                    <td>2,500</td>
+                                    <td>2,500</td>
+                                    <td>2,500</td>
+                                    <td>0</td>
+                                    <td>2,000</td>
+                                    <td>500</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>0</td>
+                                    <td>97,200</td>
+                                    <td>0.00%</td>
+                                    <td>0.00%</td>
+                                    <td>1</td>
+                                    <td>1</td>
+                                </tr>
+                                <tr>
+                                    <td>Al Afaq Insurance Brokers</td>
+                                    <td>Public Liability (Premises)</td>
+                                    <td>6,250</td>
+                                    <td>6,250</td>
+                                    <td>5,428</td>
+                                    <td>822</td>
+                                    <td>5,000</td>
+                                    <td>1,250</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>0</td>
+                                    <td>4,642,000</td>
+                                    <td>0.00%</td>
+                                    <td>0.00%</td>
+                                    <td>2</td>
+                                    <td>2</td>
+                                </tr>
+                                <tr>
+                                    <td>Al Afaq Insurance Brokers</td>
+                                    <td>Public Liability (Project)</td>
+                                    <td>5,560</td>
+                                    <td>5,560</td>
+                                    <td>5,560</td>
+                                    <td>0</td>
+                                    <td>5,421</td>
+                                    <td>139</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>0</td>
+                                    <td>2,000,000</td>
+                                    <td>0.00%</td>
+                                    <td>0.00%</td>
+                                    <td>1</td>
+                                    <td>1</td>
+                                </tr>
+                                <tr>
+                                    <td>Al Afaq Insurance Brokers</td>
+                                    <td>T.P.L</td>
+                                    <td>20,287</td>
+                                    <td>20,287</td>
+                                    <td>20,092</td>
+                                    <td>195</td>
+                                    <td>17,244</td>
+                                    <td>3,043</td>
+                                    <td>38,591</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>38,591</td>
+                                    <td>0</td>
+                                    <td>190.22%</td>
+                                    <td>192.07%</td>
+                                    <td>36</td>
+                                    <td>33</td>
+                                </tr>
+                                <tr>
+                                    <td>Al Afaq Insurance Brokers</td>
+                                    <td>Travel (Inbound)</td>
+                                    <td>100</td>
+                                    <td>100</td>
+                                    <td>100</td>
+                                    <td>0</td>
+                                    <td>100</td>
+                                    <td>0</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>0</td>
+                                    <td>300,000</td>
+                                    <td>0.00%</td>
+                                    <td>0.00%</td>
+                                    <td>2</td>
+                                    <td>2</td>
+                                </tr>
+                                <tr>
+                                    <td>Al Afaq Insurance Brokers</td>
+                                    <td>Travel Inbound MOI</td>
+                                    <td>100</td>
+                                    <td>100</td>
+                                    <td>100</td>
+                                    <td>0</td>
+                                    <td>80</td>
+                                    <td>20</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>0</td>
+                                    <td>300,000</td>
+                                    <td>0.00%</td>
+                                    <td>0.00%</td>
+                                    <td>2</td>
+                                    <td>2</td>
+                                </tr>
+                                <tr>
+                                    <td>Al Afaq Insurance Brokers</td>
+                                    <td>Workmen's Compensation</td>
+                                    <td>32,147</td>
+                                    <td>32,147</td>
+                                    <td>31,828</td>
+                                    <td>319</td>
+                                    <td>28,606</td>
+                                    <td>3,541</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>0</td>
+                                    <td>9,796,327</td>
+                                    <td>0.00%</td>
+                                    <td>0.00%</td>
+                                    <td>17</td>
+                                    <td>3</td>
+                                </tr>
+                                <tr class="grand-total">
+                                    <td>Grand Total</td>
+                                    <td>Total</td>
+                                    <td>1,124,856</td>
+                                    <td>1,124,856</td>
+                                    <td>1,118,916</td>
+                                    <td>5,940</td>
+                                    <td>932,881</td>
+                                    <td>191,974</td>
+                                    <td>177,767</td>
+                                    <td>11,930</td>
+                                    <td>0</td>
+                                    <td>189,697</td>
+                                    <td>171,836,379</td>
+                                    <td>16.86%</td>
+                                    <td>16.95%</td>
+                                    <td>129</td>
+                                    <td>95</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <div class="field-label">AI Results</div>
+                    <div class="ai-results">
+                        <p>Here is a detailed breakdown of the premium, paid commission, sum insured, total claims, loss ratio, and the number of policies, categorized by product (minor-wise) for 'Al Afaq Insurance Brokers' in 2024, specifically for the main branch.</p>
+
+                        <p>The data reveals the performance across various product lines handled by Al Afaq Insurance Brokers, highlighting their activity in Engineering, Fire, Group Life & Medical, General Accident, and Motor insurance categories.</p>
+
+                        <h3>Al Afaq Insurance Brokers - Product-wise Performance (Main Branch, 2024)</h3>
+
+                        <table style="margin: 15px 0; font-size: 0.85em;">
+                            <thead>
+                                <tr>
+                                    <th>Major Product Line</th>
+                                    <th>Minor Product Type</th>
+                                    <th>Premium (QAR)</th>
+                                    <th>Paid Commission (QAR)</th>
+                                    <th>Sum Insured (QAR)</th>
+                                    <th>Total Claims (QAR)</th>
+                                    <th>Loss Ratio (%)</th>
+                                    <th>Policy Count</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td rowspan="3"><strong>Engineering</strong></td>
+                                    <td>Contractors All Risks</td>
+                                    <td>498,974.32</td>
+                                    <td>99,794.86</td>
+                                    <td>83,021,191.70</td>
+                                    <td>0.00</td>
+                                    <td>0.00</td>
+                                    <td>1</td>
+                                </tr>
+                                <tr>
+                                    <td>Contractors Plant & Machinery</td>
+                                    <td>29,484.00</td>
+                                    <td>5,896.80</td>
+                                    <td>163,282.00</td>
+                                    <td>0.00</td>
+                                    <td>0.00</td>
+                                    <td>1</td>
+                                </tr>
+                                <tr>
+                                    <td>Erection All Risks</td>
+                                    <td>2,500.00</td>
+                                    <td>500.00</td>
+                                    <td>1,329,678.00</td>
+                                    <td>0.00</td>
+                                    <td>0.00</td>
+                                    <td>1</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Fire</strong></td>
+                                    <td>Property All Risk</td>
+                                    <td>2,500.00</td>
+                                    <td>500.00</td>
+                                    <td>97,200.00</td>
+                                    <td>0.00</td>
+                                    <td>0.00</td>
+                                    <td>1</td>
+                                </tr>
+                                <tr>
+                                    <td rowspan="5"><strong>GROUP LIFE & MEDICAL</strong></td>
+                                    <td>Group Life</td>
+                                    <td>3,715.00</td>
+                                    <td>813.90</td>
+                                    <td>45,650,000.00</td>
+                                    <td>0.00</td>
+                                    <td>0.00</td>
+                                    <td>0</td>
+                                </tr>
+                                <tr>
+                                    <td>Group Medical (DohaCare)</td>
+                                    <td>369,391.00</td>
+                                    <td>48,667.48</td>
+                                    <td>22,500,000.00</td>
+                                    <td>121,724.23</td>
+                                    <td>32.95</td>
+                                    <td>2</td>
+                                </tr>
+                                <tr>
+                                    <td>Individual Medical (DohaCare)</td>
+                                    <td>825.00</td>
+                                    <td>82.50</td>
+                                    <td>100,000.00</td>
+                                    <td>0.00</td>
+                                    <td>0.00</td>
+                                    <td>1</td>
+                                </tr>
+                                <tr>
+                                    <td>Travel (Inbound)</td>
+                                    <td>100.00</td>
+                                    <td>0.00</td>
+                                    <td>300,000.00</td>
+                                    <td>0.00</td>
+                                    <td>0.00</td>
+                                    <td>2</td>
+                                </tr>
+                                <tr>
+                                    <td>Travel Inbound MOI</td>
+                                    <td>100.00</td>
+                                    <td>20.00</td>
+                                    <td>300,000.00</td>
+                                    <td>0.00</td>
+                                    <td>0.00</td>
+                                    <td>2</td>
+                                </tr>
+                                <tr>
+                                    <td rowspan="4"><strong>General Accident</strong></td>
+                                    <td>Professional Indemnity</td>
+                                    <td>99,099.00</td>
+                                    <td>19,682.30</td>
+                                    <td>250,000.00</td>
+                                    <td>0.00</td>
+                                    <td>0.00</td>
+                                    <td>1</td>
+                                </tr>
+                                <tr>
+                                    <td>Public Liability (Premises)</td>
+                                    <td>6,250.00</td>
+                                    <td>1,250.00</td>
+                                    <td>4,642,000.00</td>
+                                    <td>0.00</td>
+                                    <td>0.00</td>
+                                    <td>2</td>
+                                </tr>
+                                <tr>
+                                    <td>Public Liability (Project)</td>
+                                    <td>5,560.00</td>
+                                    <td>139.00</td>
+                                    <td>2,000,000.00</td>
+                                    <td>0.00</td>
+                                    <td>0.00</td>
+                                    <td>1</td>
+                                </tr>
+                                <tr>
+                                    <td>Workmen's Compensation</td>
+                                    <td>32,147.27</td>
+                                    <td>3,541.01</td>
+                                    <td>9,796,327.00</td>
+                                    <td>0.00</td>
+                                    <td>0.00</td>
+                                    <td>3</td>
+                                </tr>
+                                <tr>
+                                    <td rowspan="2"><strong>Motor</strong></td>
+                                    <td>Comp</td>
+                                    <td>53,923.02</td>
+                                    <td>8,043.45</td>
+                                    <td>1,686,700.00</td>
+                                    <td>29,382.00</td>
+                                    <td>54.49</td>
+                                    <td>44</td>
+                                </tr>
+                                <tr>
+                                    <td>T.P.L</td>
+                                    <td>20,287.02</td>
+                                    <td>3,043.05</td>
+                                    <td>0.00</td>
+                                    <td>38,590.80</td>
+                                    <td>190.22</td>
+                                    <td>33</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <h3>Key Insights and Business Context:</h3>
+                        <ul>
+                            <li><strong>Engineering Products Dominance in Premium and Sum Insured:</strong> 'Contractors All Risks' under the Engineering major product line stands out with the highest premium generated (QAR 498,974.32) and the largest sum insured (QAR 83,021,191.70). This indicates a significant focus or success in securing large construction-related policies, which typically involve substantial project values.</li>
+                            <li><strong>Medical Insurance Performance:</strong> 'Group Medical (DohaCare)' shows a substantial premium of QAR 369,391.00 and has incurred claims totaling QAR 121,724.23, resulting in a loss ratio of 32.95%. This loss ratio is within an acceptable range for medical insurance, suggesting a balanced claims experience relative to premiums.</li>
+                            <li><strong>Motor Insurance Activity and Loss Ratios:</strong> Motor insurance, particularly 'Comp' (Comprehensive) and 'T.P.L' (Third Party Liability), shows the highest policy counts (44 and 33 respectively), indicating a high volume of transactions.
+                                <ul>
+                                    <li>'Motor Comp' has a premium of QAR 53,923.02 with claims of QAR 29,382.00, leading to a loss ratio of 54.49%. This is a moderate loss ratio for motor comprehensive insurance.</li>
+                                    <li>'Motor T.P.L' has a premium of QAR 20,287.02 but a significantly higher claims amount of QAR 38,590.80, resulting in a high loss ratio of 190.22%. This indicates that claims paid out for Third Party Liability policies are substantially higher than the premiums collected for this specific product during the period, which could be a point of concern for profitability if this trend continues.</li>
+                                </ul>
+                            </li>
+                            <li><strong>Low Claim Activity in Most Lines:</strong> A large number of product types, including all Engineering and Fire products, as well as several General Accident and Group Life & Medical products (e.g., Group Life, Individual Medical, Travel), show zero total claims. This could imply a relatively low-risk portfolio for these specific products or that no major claim events occurred within the analyzed period for these policies.</li>
+                            <li><strong>Commission Structures:</strong> The paid commission varies significantly by product. For instance, 'Contractors All Risks' has a high commission of QAR 99,794.86, reflecting its high premium. The commission rates appear to differ, with some products like 'Travel (Inbound)' showing QAR 0.00 commission, which might be due to specific agreements or policy types.</li>
+                            <li><strong>Policy Count vs. Premium:</strong> While 'Motor Comp' and 'T.P.L' have the highest number of policies, their individual policy premiums are generally lower compared to high-value policies like 'Contractors All Risks'. This highlights the difference between high-volume, lower-premium products and lower-volume, higher-premium products in the broker's portfolio.</li>
+                        </ul>
+
+                        <h3>Summary of Key Findings:</h3>
+                        <p>Al Afaq Insurance Brokers' main branch in 2024 demonstrates strong performance in Engineering products, particularly 'Contractors All Risks', contributing significantly to premiums and sum insured with no claims reported. The Group Life & Medical segment, especially 'Group Medical (DohaCare)', is also a notable contributor with a manageable loss ratio. Motor insurance, while having the highest number of policies, shows a concerningly high loss ratio for 'Motor T.P.L', indicating that claims are exceeding premiums for this specific product line. Most other product lines show healthy performance with no reported claims during this period. Monitoring the 'Motor T.P.L' loss ratio will be crucial for the broker's overall profitability and risk management.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="test-footer">
+                <div class="footer-item">
+                    <div class="footer-label">Matched</div>
+                    <div class="footer-value"><span class="status-badge status-correct">Correct</span></div>
+                </div>
+                <div class="footer-item">
+                    <div class="footer-label">If False - Description</div>
+                    <div class="footer-value">None</div>
+                </div>
+                <div class="footer-item">
+                    <div class="footer-label">Which Try</div>
+                    <div class="footer-value">Second Try</div>
+                </div>
+                <div class="footer-item">
+                    <div class="footer-label">Tested With</div>
+                    <div class="footer-value">Amala</div>
+                </div>
+                <div class="footer-item">
+                    <div class="footer-label">Tested From</div>
+                    <div class="footer-value">Yazeed</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- Test 3 -->
+        <div class="test-card">
+            <div class="test-header">
+                <span class="test-id">Test ID: 3</span>
+                <div class="report-name">Agent & Customerwise Summary</div>
+            </div>
+            <div class="test-body">
+                <div class="field">
+                    <div class="field-label">Description</div>
+                    <div class="field-content">
+                        Display the premium, paid commission, sum insured, total claims, loss ratio, and the number of policies. This should be displayed for each customer at the level of the given broker.
+                    </div>
+                </div>
+
+                <div class="field">
+                    <div class="field-label">Considerations</div>
+                    <div class="field-content">
+                        The Reg_date 2024 - Broker Name Al Afaq - The branch is the Main Branch
+                    </div>
+                </div>
+
+                <div class="field">
+                    <div class="field-label">Input</div>
+                    <div class="field-content">
+                        please display the premium, paid commission, sum insured, total claims, loss ratio, and the number of policies, for the broker called al afaq insurance, I want you display the information customer wise, show this information for each customer, and I want the answer in a table format. The year 2024, and the branch is the main branch.
+                    </div>
+                </div>
+
+                <div class="field">
+                    <div class="field-label">Expected Results</div>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Insured name</th>
+                                    <th>Premium</th>
+                                    <th>GWP</th>
+                                    <th>NEP</th>
+                                    <th>UPR</th>
+                                    <th>Net Premium</th>
+                                    <th>Paid Commission</th>
+                                    <th>Paid Claims</th>
+                                    <th>Outstanding Value</th>
+                                    <th>Payment Recovery</th>
+                                    <th>Incurred Claims</th>
+                                    <th>Sum Insured</th>
+                                    <th>Loss Ratio</th>
+                                    <th>Earned Loss Ratio</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Petroserv for Oil & Gas W.L.L.</td>
+                                    <td>490474</td>
+                                    <td>490474</td>
+                                    <td>490474</td>
+                                    <td>0</td>
+                                    <td>392379</td>
+                                    <td>98095</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>0</td>
+                                    <td>53368392</td>
+                                    <td>0.00%</td>
+                                    <td>0.00%</td>
+                                </tr>
+                                <tr>
+                                    <td>TDGISERV SERVICES</td>
+                                    <td>249362</td>
+                                    <td>249362</td>
+                                    <td>249362</td>
+                                    <td>0</td>
+                                    <td>215698</td>
+                                    <td>33664</td>
+                                    <td>102005</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>102005</td>
+                                    <td>14100000</td>
+                                    <td>40.91%</td>
+                                    <td>40.91%</td>
+                                </tr>
+                                <tr>
+                                    <td>Mazaya Medical Trading</td>
+                                    <td>120029</td>
+                                    <td>120029</td>
+                                    <td>120029</td>
+                                    <td>0</td>
+                                    <td>105025</td>
+                                    <td>15004</td>
+                                    <td>19719</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>19719</td>
+                                    <td>8400000</td>
+                                    <td>16.43%</td>
+                                    <td>16.43%</td>
+                                </tr>
+                                <tr>
+                                    <td>HARINSA CONTRACTING</td>
+                                    <td>96349</td>
+                                    <td>96349</td>
+                                    <td>96349</td>
+                                    <td>0</td>
+                                    <td>77079</td>
+                                    <td>19270</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0.00%</td>
+                                    <td>0.00%</td>
+                                </tr>
+                                <tr>
+                                    <td>Qatar Consol WLL</td>
+                                    <td>30633</td>
+                                    <td>30633</td>
+                                    <td>30633</td>
+                                    <td>0</td>
+                                    <td>27395</td>
+                                    <td>3238</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>0</td>
+                                    <td>8819407</td>
+                                    <td>0.00%</td>
+                                    <td>0.00%</td>
+                                </tr>
+                                <tr>
+                                    <td>Rheinmetall Barzan Advanced Technologies QSTP-LLC (RBAT)</td>
+                                    <td>29484</td>
+                                    <td>29484</td>
+                                    <td>26172</td>
+                                    <td>3312</td>
+                                    <td>23587</td>
+                                    <td>5897</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>0</td>
+                                    <td>163282</td>
+                                    <td>0.00%</td>
+                                    <td>0.00%</td>
+                                </tr>
+                                <tr>
+                                    <td>Constreite Qatar for Construction Maintenance WLL</td>
+                                    <td>13500</td><td>13500</td><td>13500</td><td>0</td><td>10800</td><td>2700</td>
+                                    <td></td><td>0</td><td></td><td>0</td><td>30750000</td><td>0.00%</td><td>0.00%</td>
+                                </tr>
+                                <tr>
+                                    <td>SUPPLYCO TRADIN AND SERVICES</td>
+                                    <td>11200</td><td>11200</td><td>11123</td><td>77</td><td>9520</td><td>1680</td>
+                                    <td>29374</td><td>0</td><td>0</td><td>29374</td><td>0</td><td>262.27%</td><td>264.07%</td>
+                                </tr>
+                                <tr>
+                                    <td>QATAR CONSOL</td>
+                                    <td>11125</td><td>11125</td><td>10423</td><td>702</td><td>9456</td><td>1669</td>
+                                    <td>3225</td><td>1930</td><td>0</td><td>5155</td><td>163800</td><td>46.34%</td><td>49.46%</td>
+                                </tr>
+                                <tr>
+                                    <td>Eram Engineering Company WLL</td>
+                                    <td>9000</td><td>9000</td><td>8931</td><td>69</td><td>7695</td><td>1305</td>
+                                    <td>700</td><td>0</td><td>0</td><td>700</td><td>386200</td><td>7.78%</td><td>7.84%</td>
+                                </tr>
+                                <tr>
+                                    <td>Remal Security Services</td>
+                                    <td>5875</td><td>5875</td><td>5762</td><td>113</td><td>4869</td><td>1006</td>
+                                    <td></td><td></td><td>0</td><td></td><td>1379678</td><td>0.00%</td><td>0.00%</td>
+                                </tr>
+                                <tr>
+                                    <td>Petroserv Limited</td>
+                                    <td>5560</td><td>5560</td><td>5560</td><td>0</td><td>5421</td><td>139</td>
+                                    <td></td><td></td><td>0</td><td></td><td>2000000</td><td>0.00%</td><td>0.00%</td>
+                                </tr>
+                                <tr>
+                                    <td>Barzan Holding QSTP LLC</td>
+                                    <td>5133</td><td>5133</td><td>5133</td><td>0</td><td>4106</td><td>1027</td>
+                                    <td></td><td></td><td>0</td><td></td><td>49500000</td><td>0.00%</td><td>0.00%</td>
+                                </tr>
+                                <tr>
+                                    <td>GETIT Trading</td>
+                                    <td>4600</td><td>4600</td><td>4600</td><td>0</td><td>3910</td><td>690</td>
+                                    <td></td><td></td><td>0</td><td></td><td>226800</td><td>0.00%</td><td>0.00%</td>
+                                </tr>
+                                <tr>
+                                    <td>شركة ايرام الهندسيه</td>
+                                    <td>4350</td><td>4350</td><td>4350</td><td>0</td><td>3698</td><td>653</td>
+                                    <td>4727</td><td>3000</td><td>0</td><td>7727</td><td>233000</td><td>177.63%</td><td>177.63%</td>
+                                </tr>
+                                <tr>
+                                    <td>ERAM ENGINEERING COMPANY</td>
+                                    <td>3805</td><td>3805</td><td>3805</td><td>0</td><td>3234</td><td>571</td>
+                                    <td></td><td></td><td>0</td><td></td><td>125000</td><td>0.00%</td><td>0.00%</td>
+                                </tr>
+                                <tr>
+                                    <td>Skylex Maintenance & Constructors CO WLL</td>
+                                    <td>3750</td><td>3750</td><td>2928</td><td>822</td><td>3000</td><td>750</td>
+                                    <td></td><td></td><td>0</td><td></td><td>3642000</td><td>0.00%</td><td>0.00%</td>
+                                </tr>
+                                <tr>
+                                    <td>AHMED ABDULLA M A AL-KHULAIFI</td>
+                                    <td>3750</td><td>3750</td><td>3750</td><td>0</td><td>3188</td><td>563</td>
+                                    <td>6859</td><td>0</td><td>0</td><td>6859</td><td>0</td><td>182.91%</td><td>182.91%</td>
+                                </tr>
+                                <tr>
+                                    <td>OFFROAD GROUP</td>
+                                    <td>3325</td><td>3325</td><td>3325</td><td>0</td><td>2826</td><td>499</td>
+                                    <td>8800</td><td>7000</td><td>0</td><td>15800</td><td>57600</td><td>475.19%</td><td>475.19%</td>
+                                </tr>
+                                <tr>
+                                    <td>MOHAMMED SABRI H H AL-ZAIDAN</td>
+                                    <td>3036</td><td>3036</td><td>2795</td><td>241</td><td>2581</td><td>455</td>
+                                    <td></td><td></td><td>0</td><td></td><td>140000</td><td>0.00%</td><td>0.00%</td>
+                                </tr>
+                                <tr>
+                                    <td>Stratagema LLC</td>
+                                    <td>2750</td><td>2750</td><td>2750</td><td>0</td><td>2338</td><td>413</td>
+                                    <td></td><td></td><td>0</td><td></td><td>250000</td><td>0.00%</td><td>0.00%</td>
+                                </tr>
+                                <tr>
+                                    <td>Euro Postech International WLL</td>
+                                    <td>2664</td><td>2664</td><td>2341</td><td>323</td><td>2189</td><td>475</td>
+                                    <td>2358</td><td>0</td><td>0</td><td>2358</td><td>976920</td><td>88.51%</td><td>100.71%</td>
+                                </tr>
+                                <tr>
+                                    <td>Q LIGHT QATAR</td>
+                                    <td>2200</td><td>2200</td><td>2131</td><td>69</td><td>1870</td><td>330</td>
+                                    <td></td><td></td><td>0</td><td></td><td>41500</td><td>0.00%</td><td>0.00%</td>
+                                </tr>
+                                <tr>
+                                    <td>GETIT MART</td>
+                                    <td>1650</td><td>1650</td><td>1650</td><td>0</td><td>1403</td><td>248</td>
+                                    <td></td><td></td><td>0</td><td></td><td>14000</td><td>0.00%</td><td>0.00%</td>
+                                </tr>
+                                <tr>
+                                    <td>SUPPLYCO TRADING SERVICES</td>
+                                    <td>1450</td><td>1450</td><td>1335</td><td>115</td><td>1233</td><td>218</td>
+                                    <td></td><td></td><td>0</td><td></td><td>0</td><td>0.00%</td><td>0.00%</td>
+                                </tr>
+                                <tr>
+                                    <td>PODERIO FOR TRADING AND CONT</td>
+                                    <td>1325</td><td>1325</td><td>1325</td><td>0</td><td>1126</td><td>199</td>
+                                    <td></td><td></td><td>0</td><td></td><td>21000</td><td>0.00%</td><td>0.00%</td>
+                                </tr>
+                                <tr>
+                                    <td>HOME CORNER DESIGN AND DECORATION</td>
+                                    <td>1325</td><td>1325</td><td>1325</td><td>0</td><td>1126</td><td>199</td>
+                                    <td></td><td></td><td>0</td><td></td><td>20500</td><td>0.00%</td><td>0.00%</td>
+                                </tr>
+                                <tr>
+                                    <td>AHMED ABDELHAMEED</td>
+                                    <td>1316</td><td>1316</td><td>1316</td><td>0</td><td>1119</td><td>197</td>
+                                    <td></td><td></td><td>0</td><td></td><td>63000</td><td>0.00%</td><td>0.00%</td>
+                                </tr>
+                                <tr>
+                                    <td>AL HAYAT MEDICAL CENTER</td>
+                                    <td>1250</td><td>1250</td><td>1250</td><td>0</td><td>1063</td><td>188</td>
+                                    <td></td><td></td><td>0</td><td></td><td>36000</td><td>0.00%</td><td>0.00%</td>
+                                </tr>
+                                <tr>
+                                    <td>Q Light Qatar</td>
+                                    <td>1200</td><td>1200</td><td>1170</td><td>30</td><td>1020</td><td>180</td>
+                                    <td></td><td></td><td>0</td><td></td><td>38000</td><td>0.00%</td><td>0.00%</td>
+                                </tr>
+                                <tr>
+                                    <td>New Crest Catering</td>
+                                    <td>1150</td><td>1150</td><td>1150</td><td>0</td><td>978</td><td>173</td>
+                                    <td></td><td></td><td>0</td><td></td><td>30000</td><td>0.00%</td><td>0.00%</td>
+                                </tr>
+                                <tr>
+                                    <td>HEPSIBA RUTH SHANMUGHAM</td>
+                                    <td>966</td><td>966</td><td>908</td><td>58</td><td>821</td><td>145</td>
+                                    <td></td><td></td><td>0</td><td></td><td>15300</td><td>0.00%</td><td>0.00%</td>
+                                </tr>
+                                <tr>
+                                    <td>BASSEM MOSBAH ADROSS MOHAMED HABIB</td>
+                                    <td>950</td><td>950</td><td>950</td><td>0</td><td>808</td><td>143</td>
+                                    <td></td><td></td><td>0</td><td></td><td>25000</td><td>0.00%</td><td>0.00%</td>
+                                </tr>
+                                <tr>
+                                    <td>MELANIE ACOSTA BARIT</td>
+                                    <td>825</td><td>825</td><td>825</td><td>0</td><td>743</td><td>83</td>
+                                    <td></td><td></td><td>0</td><td></td><td>100000</td><td>0.00%</td><td>0.00%</td>
+                                </tr>
+                                <tr>
+                                    <td>MOHAMMED ALFADAL ABDAL HAFIZ OMAR</td>
+                                    <td>500</td><td>500</td><td>500</td><td>0</td><td>425</td><td>75</td>
+                                    <td></td><td></td><td>0</td><td></td><td>0</td><td>0.00%</td><td>0.00%</td>
+                                </tr>
+                                <tr>
+                                    <td>REMAL ELECTRIC POWER</td>
+                                    <td>462</td><td>462</td><td>462</td><td>0</td><td>393</td><td>69</td>
+                                    <td></td><td></td><td>0</td><td></td><td>0</td><td>0.00%</td><td>0.00%</td>
+                                </tr>
+                                <tr>
+                                    <td>NOOR SALEM HUSSEIN AL SALAHAT</td>
+                                    <td>100</td><td>100</td><td>100</td><td>0</td><td>90</td><td>10</td>
+                                    <td></td><td></td><td>0</td><td></td><td>300000</td><td>0.00%</td><td>0.00%</td>
+                                </tr>
+                                <tr>
+                                    <td>NEW AL RAYYAN TRADING</td>
+                                    <td>100</td><td>100</td><td>100</td><td>0</td><td>85</td><td>15</td>
+                                    <td></td><td></td><td>0</td><td></td><td>0</td><td>0.00%</td><td>0.00%</td>
+                                </tr>
+                                <tr>
+                                    <td>AL ADEED MOATH SALEH ALQADI</td>
+                                    <td>100</td><td>100</td><td>100</td><td>0</td><td>90</td><td>10</td>
+                                    <td></td><td></td><td>0</td><td></td><td>300000</td><td>0.00%</td><td>0.00%</td>
+                                </tr>
+                                <tr>
+                                    <td>MOHAMED ALI A M AL-AHMAD</td>
+                                    <td>50</td><td>50</td><td>41</td><td>9</td><td>43</td><td>8</td>
+                                    <td></td><td></td><td>0</td><td></td><td>0</td><td>0.00%</td><td>0.00%</td>
+                                </tr>
+                                <tr>
+                                    <td>E AND K DEVILOPMENT FOR TRADING AND CONTRACTING</td>
+                                    <td>50</td><td>50</td><td>50</td><td>0</td><td>43</td><td>8</td>
+                                    <td></td><td></td><td>0</td><td></td><td>0</td><td>0.00%</td><td>0.00%</td>
+                                </tr>
+                                <tr>
+                                    <td>ALSWIDANI JAMAL NASSER</td>
+                                    <td>50</td><td>50</td><td>50</td><td>0</td><td>43</td><td>8</td>
+                                    <td></td><td></td><td>0</td><td></td><td>0</td><td>0.00%</td><td>0.00%</td>
+                                </tr>
+                                <tr>
+                                    <td>HAMED SALIM G AL SAADI</td>
+                                    <td>-500</td><td>-500</td><td>-500</td><td>0</td><td>-425</td><td>-75</td>
+                                    <td></td><td></td><td>0</td><td></td><td>0</td><td>0.00%</td><td>0.00%</td>
+                                </tr>
+                                <tr>
+                                    <td>Dream Hotel Doha W.L.L</td>
+                                    <td>-1418</td><td>-1418</td><td>-1418</td><td>0</td><td>-1205</td><td>-213</td>
+                                    <td></td><td></td><td>0</td><td></td><td>-3850000</td><td>0.00%</td><td>0.00%</td>
+                                </tr>                                
+                                <tr class="grand-total">
+                                    <td>Grand Total</td>
+                                    <td>1124856</td>
+                                    <td>1124856</td>
+                                    <td>1118916</td>
+                                    <td>5940</td>
+                                    <td>932881</td>
+                                    <td>191974</td>
+                                    <td>177767</td>
+                                    <td>11930</td>
+                                    <td>0</td>
+                                    <td>189697</td>
+                                    <td>171836379</td>
+                                    <td>16.86%</td>
+                                    <td>16.95%</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p style="margin-top: 10px; font-style: italic; color: #666;">Complete Expected Results Table - All 42 customers with full data breakdown.</p>
+                </div>
+
+                <div class="field">
+                    <div class="field-label">AI Results</div>
+                    <div class="ai-results" id="ai-result-3"></div>
+                </div>
+            </div>
+            <div class="test-footer">
+                <div class="footer-item">
+                    <div class="footer-label">Matched</div>
+                    <div class="footer-value"><span class="status-badge status-correct">Correct</span></div>
+                </div>
+                <div class="footer-item">
+                    <div class="footer-label">If False - Description</div>
+                    <div class="footer-value">None</div>
+                </div>
+                <div class="footer-item">
+                    <div class="footer-label">Which Try</div>
+                    <div class="footer-value">First Try</div>
+                </div>
+                <div class="footer-item">
+                    <div class="footer-label">Tested With</div>
+                    <div class="footer-value">Amala</div>
+                </div>
+                <div class="footer-item">
+                    <div class="footer-label">Tested From</div>
+                    <div class="footer-value">Yazeed</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- Test 4 -->
+        <div class="test-card">
+            <div class="test-header">
+                <span class="test-id">Test ID: 4</span>
+                <div class="report-name">Policy Summary by Registration Year</div>
+            </div>
+            <div class="test-body">
+                <div class="field">
+                    <div class="field-label">Description</div>
+                    <div class="field-content">
+                        Based on customer we're listing all the policies. Customer Code, Customer Name, Major, Minor, Business Type, Policy year, Policy Number, Sum Insured, Premium, Total claim, and the loss ratio.
+                    </div>
+                </div>
+
+                <div class="field">
+                    <div class="field-label">Conditions</div>
+                    <div class="field-content">
+                        Code 8000115009 - Main branch - Group life & medical.
+                    </div>
+                </div>
+
+                <div class="field">
+                    <div class="field-label">Input</div>
+                    <div class="field-content">
+                        For the customer with code 8000115009, could you please display these information as a policy wise - for each policy -> Customer Code, Customer Name, Major, Minor, Business Type, Policy year, Policy Number, Sum Insured, Premium, Total claim, and the loss ratio. Under the main branch, and also Major type is group life.
+                    </div>
+                </div>
+
+                <div class="field">
+                    <div class="field-label">Expected Results</div>
+                    <div class="table-container">
+                        <table style="font-size: 0.7em;">
+                            <thead>
+                                <tr>
+                                    <th>Number</th>
+                                    <th>Name</th>
+                                    <th>Line of Business</th>
+                                    <th>Policy Type</th>
+                                    <th>Business Type</th>
+                                    <th>Pol Year</th>
+                                    <th>Pol No</th>
+                                    <th>Unique Pol Key</th>
+                                    <th>Doc Sum Insured</th>
+                                    <th>Gross Premium</th>
+                                    <th>Paid Claims</th>
+                                    <th>Incurred Claims</th>
+                                    <th>Loss Ratio</th>
+                                    <th>Payment Recovery</th>
+                                    <th>OS Value</th>
+                                    <th>Paid Commission</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>8000115009</td>
+                                    <td>Ezdan Holding Group</td>
+                                    <td>Group Life & Medical</td>
+                                    <td>Group Medical (DohaCare)</td>
+                                    <td>Co-Insurance</td>
+                                    <td>2019</td>
+                                    <td>26</td>
+                                    <td>01/01/L&M/MED/26/2019/P</td>
+                                    <td>84,958,500</td>
+                                    <td>1,336,602</td>
+                                    <td>1,029,867</td>
+                                    <td>1,029,867</td>
+                                    <td>77.05%</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                </tr>
+                                <tr>
+                                    <td>8000115009</td>
+                                    <td>Ezdan Holding Group</td>
+                                    <td>Group Life & Medical</td>
+                                    <td>Group Medical (DohaCare)</td>
+                                    <td>Co-Insurance</td>
+                                    <td>2020</td>
+                                    <td>25</td>
+                                    <td>01/01/L&M/MED/25/2020/P</td>
+                                    <td>64,362,500</td>
+                                    <td>1,232,628</td>
+                                    <td>1,176,183</td>
+                                    <td>626,419</td>
+                                    <td>50.82%</td>
+                                    <td>549,764</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                </tr>
+                                <tr>
+                                    <td>8000115009</td>
+                                    <td>Ezdan Holding Group</td>
+                                    <td>Group Life & Medical</td>
+                                    <td>Group Medical (DohaCare)</td>
+                                    <td>Co-Insurance</td>
+                                    <td>2021</td>
+                                    <td>27</td>
+                                    <td>01/01/L&M/MED/27/2021/P</td>
+                                    <td>0</td>
+                                    <td>904,315</td>
+                                    <td>1,112,458</td>
+                                    <td>1,112,458</td>
+                                    <td>123.02%</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                </tr>
+                                <tr>
+                                    <td>8000115009</td>
+                                    <td>Ezdan Holding Group</td>
+                                    <td>Group Life & Medical</td>
+                                    <td>Group Medical (DohaCare)</td>
+                                    <td>Co-Insurance</td>
+                                    <td>2022</td>
+                                    <td>51</td>
+                                    <td>01/01/L&M/MED/51/2022/P</td>
+                                    <td>0</td>
+                                    <td>685,749</td>
+                                    <td>821,615</td>
+                                    <td>821,615</td>
+                                    <td>119.81%</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                </tr>
+                                <tr>
+                                    <td>8000115009</td>
+                                    <td>Ezdan Holding Group</td>
+                                    <td>Group Life & Medical</td>
+                                    <td>Group Medical (DohaCare)</td>
+                                    <td>Co-Insurance</td>
+                                    <td>2023</td>
+                                    <td>86</td>
+                                    <td>01/01/LM/MED/86/2023/P</td>
+                                    <td>0</td>
+                                    <td>745,730</td>
+                                    <td>1,343,776</td>
+                                    <td>885,298</td>
+                                    <td>118.72%</td>
+                                    <td>458,477</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                </tr>
+                                <tr>
+                                    <td>8000115009</td>
+                                    <td>Ezdan Holding Group</td>
+                                    <td>Group Life & Medical</td>
+                                    <td>Group Medical (DohaCare)</td>
+                                    <td>Co-Insurance</td>
+                                    <td>2025</td>
+                                    <td>124</td>
+                                    <td>01/01/LM/MED/124/2025/P</td>
+                                    <td>4,800,000</td>
+                                    <td>46,341</td>
+                                    <td>-</td>
+                                    <td>0</td>
+                                    <td>0.00%</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>0</td>
+                                </tr>
+                                <tr>
+                                    <td>8000115009</td>
+                                    <td>Ezdan Holding Group</td>
+                                    <td>Group Life & Medical</td>
+                                    <td>Group Medical (DohaCare)</td>
+                                    <td>Co-Insurance</td>
+                                    <td>2025</td>
+                                    <td>125</td>
+                                    <td>01/01/LM/MED/125/2025/P</td>
+                                    <td>0</td>
+                                    <td>936,165</td>
+                                    <td>-</td>
+                                    <td>0</td>
+                                    <td>0.00%</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>0</td>
+                                </tr>
+                                <tr class="grand-total">
+                                    <td>Grand Total</td>
+                                    <td>Total</td>
+                                    <td>Total</td>
+                                    <td>Total</td>
+                                    <td>Total</td>
+                                    <td>Total</td>
+                                    <td>Total</td>
+                                    <td>Total</td>
+                                    <td>154,121,000</td>
+                                    <td>5,887,530</td>
+                                    <td>5,483,898</td>
+                                    <td>4,475,657</td>
+                                    <td>76.02%</td>
+                                    <td>1,008,241</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <div class="field-label">AI Results</div>
+                    <div class="ai-results" id="ai-result-4"></div>
+                </div>
+            </div>
+            <div class="test-footer">
+                <div class="footer-item">
+                    <div class="footer-label">Matched</div>
+                    <div class="footer-value"><span class="status-badge status-correct">Correct</span></div>
+                </div>
+                <div class="footer-item">
+                    <div class="footer-label">If False - Description</div>
+                    <div class="footer-value">None</div>
+                </div>
+                <div class="footer-item">
+                    <div class="footer-label">Which Try</div>
+                    <div class="footer-value">First Try</div>
+                </div>
+                <div class="footer-item">
+                    <div class="footer-label">Tested With</div>
+                    <div class="footer-value">Amala</div>
+                </div>
+                <div class="footer-item">
+                    <div class="footer-label">Tested From</div>
+                    <div class="footer-value">Yazeed</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- Test 5 -->
+        <div class="test-card">
+            <div class="test-header">
+                <span class="test-id">Test ID: 5</span>
+                <div class="report-name">Write here the report name for the test.</div>
+            </div>
+            <div class="test-body">
+                <div class="field">
+                    <div class="field-label">Description</div>
+                    <div class="field-content">
+                        Write here the description for the test.
+                    </div>
+                </div>
+
+                <div class="field">
+                    <div class="field-label">Conditions</div>
+                    <div class="field-content">
+                        Write here the conditions for the test.
+                    </div>
+                </div>
+
+                <div class="field">
+                    <div class="field-label">Input</div>
+                    <div class="field-content">
+                        Write here the input for the test.
+                    </div>
+                </div>
+
+                
+                <div class="field">
+                    <div class="field-label">Expected Results</div>
+                    <div class="table-container">
+
+                    </div>
+                </div>
+
+                <div class="field">
+                    <div class="field-label">AI Results</div>
+                    <div class="ai-results" id="ai-result-5"></div>
+                </div>
+            </div>
+            <div class="test-footer">
+                <div class="footer-item">
+                    <div class="footer-label">Matched</div>
+                    <div class="footer-value"><span class="status-badge status-true">True</span></div>
+                </div>  
+                <div class="footer-item">
+                    <div class="footer-label">If False - Description</div>
+                    <div class="footer-value">Write here the description for the test.</div>
+                </div>
+                <div class="footer-item">
+                    <div class="footer-label">Which Try</div>
+                    <div class="footer-value">Write here the try for the test.</div>
+                </div>
+                <div class="footer-item">
+                    <div class="footer-label">Tested With</div>
+                    <div class="footer-value">Amala</div>
+                </div>
+                <div class="footer-item">
+                    <div class="footer-label">Tested From</div>
+                    <div class="footer-value">Yazeed</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Test n -->
+        <div class="test-card">
+            <div class="test-header">
+                <span class="test-id">Test ID: n</span>
+                <div class="report-name">Write here the report name for the test.</div>
+            </div>
+            <div class="test-body">
+                <div class="field">
+                    <div class="field-label">Description</div>
+                    <div class="field-content">
+                        Write here the description for the test.
+                    </div>
+                </div>
+
+                <div class="field">
+                    <div class="field-label">Conditions</div>
+                    <div class="field-content">
+                        Write here the conditions for the test.
+                    </div>
+                </div>
+
+                <div class="field">
+                    <div class="field-label">Input</div>
+                    <div class="field-content">
+                        Write here the input for the test.
+                    </div>
+                </div>
+
+                
+                <div class="field">
+                    <div class="field-label">Expected Results</div>
+                    <div class="table-container">
+
+                    </div>
+                </div>
+
+                <div class="field">
+                    <div class="field-label">AI Results</div>
+                    <div class="ai-results" id="ai-result-n"></div>
+                </div>
+            </div>
+            <div class="test-footer">
+                <div class="footer-item">
+                    <div class="footer-label">Matched</div>
+                    <div class="footer-value"><span class="status-badge status-true">True</span></div>
+                </div>  
+                <div class="footer-item">
+                    <div class="footer-label">If False - Description</div>
+                    <div class="footer-value">Write here the description for the test.</div>
+                </div>
+                <div class="footer-item">
+                    <div class="footer-label">Which Try</div>
+                    <div class="footer-value">Write here the try for the test.</div>
+                </div>
+                <div class="footer-item">
+                    <div class="footer-label">Tested With</div>
+                    <div class="footer-value">Amala</div>
+                </div>
+                <div class="footer-item">
+                    <div class="footer-label">Tested From</div>
+                    <div class="footer-value">Yazeed</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- Footer -->
+        <div style="text-align: center; padding: 30px; background: #f8f9fa; color: #666;">
+            <p>K2 Insurance AI Assistant - Test Documentation</p>
+            <p style="font-size: 0.9em; margin-top: 5px;">Generated from tests.txt</p>
+        </div>
+    </div>
+
+    <script>
+        function parseMarkdown(text) {
+            text = text.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+            text = text.replace(/\*(.+?)\*/g, '<em>$1</em>');
+            
+            const lines = text.split('\n');
+            let html = '';
+            let inList = false;
+            let inTable = false;
+            let listDepth = 0;
+            
+            for (let i = 0; i < lines.length; i++) {
+                const line = lines[i];
+                const trimmed = line.trim();
+                
+                if (trimmed === '') {
+                    if (inList) {
+                        for (let d = 0; d < listDepth; d++) {
+                            html += '</ul>';
+                        }
+                        inList = false;
+                        listDepth = 0;
+                    }
+                    if (inTable) {
+                        html += '</tbody></table>';
+                        inTable = false;
+                    }
+                    continue;
+                }
+                
+                if (trimmed.includes('|')) {
+                    const cells = trimmed.split('|').map(c => c.trim()).filter(c => c !== '');
+                    
+                    if (trimmed.includes(':--') || trimmed.includes('--:') || trimmed.includes('---')) {
+                        continue;
+                    }
+                    
+                    if (!inTable) {
+                        html += '<table><thead><tr>';
+                        cells.forEach(cell => {
+                            html += `<th>${cell}</th>`;
+                        });
+                        html += '</tr></thead><tbody>';
+                        inTable = true;
+                    } else {
+                        html += '<tr>';
+                        cells.forEach(cell => {
+                            html += `<td>${cell}</td>`;
+                        });
+                        html += '</tr>';
+                    }
+                }
+                else if (trimmed.match(/^[\*\-]\s+/)) {
+                    if (inTable) {
+                        html += '</tbody></table>';
+                        inTable = false;
+                    }
+                    
+                    const indent = line.search(/\S/);
+                    const newDepth = Math.floor(indent / 4) + 1;
+                    
+                    if (!inList) {
+                        html += '<ul>';
+                        inList = true;
+                        listDepth = 1;
+                    } else if (newDepth > listDepth) {
+                        html += '<ul>';
+                        listDepth++;
+                    } else if (newDepth < listDepth) {
+                        for (let d = listDepth; d > newDepth; d--) {
+                            html += '</ul></li>';
+                        }
+                        listDepth = newDepth;
+                    }
+                    
+                    const content = trimmed.replace(/^[\*\-]\s+/, '');
+                    html += `<li>${content}`;
+                }
+                else if (trimmed.match(/^\*\*.*:\*\*$/)) {
+                    if (inList) {
+                        for (let d = 0; d < listDepth; d++) {
+                            html += '</ul>';
+                        }
+                        inList = false;
+                        listDepth = 0;
+                    }
+                    if (inTable) {
+                        html += '</tbody></table>';
+                        inTable = false;
+                    }
+                    const content = trimmed.replace(/^\*\*/, '').replace(/:\*\*$/, ':');
+                    html += `<h3>${content}</h3>`;
+                }
+                else {
+                    if (inList) {
+                        for (let d = 0; d < listDepth; d++) {
+                            html += '</ul>';
+                        }
+                        inList = false;
+                        listDepth = 0;
+                    }
+                    if (inTable) {
+                        html += '</tbody></table>';
+                        inTable = false;
+                    }
+                    html += `<p>${trimmed}</p>`;
+                }
+            }
+            
+            if (inList) {
+                for (let d = 0; d < listDepth; d++) {
+                    html += '</ul>';
+                }
+            }
+            if (inTable) html += '</tbody></table>';
+            
+            return html;
+        }
+
+        const aiResult1 = `For Al Afaq Insurance Brokers, specifically for policies and transactions involving 'Al Afaq Insurance Brokers' as the agent, for the year 2024 and from the main branch, the key financial and operational metrics are as follows:
+
+*   **Total Premium:** AED 1,124,855.63
+*   **Paid Commission:** AED 191,974.35
+*   **Total Claims:** AED 189,697.03
+*   **Total Sum Insured:** AED 171,836,378.70
+*   **Loss Ratio:** 16.86%
+*   **Number of Policies:** 95
+*   **Number of Transactions:** 129
+
+**Business Context and Insights:**
+
+The data indicates a robust performance for Al Afaq Insurance Brokers through the main branch in 2024, focusing on policies where 'Al Afaq Insurance Brokers' is explicitly listed as the agent.
+
+*   **Premium and Commission:** The total premium generated is over AED 1.12 million, from which the broker earned approximately AED 192K in commission. This commission represents a significant revenue stream for the broker, reflecting their success in policy sales.
+*   **Claims and Sum Insured:** The total sum insured, representing the maximum liability the insurer could face across all policies, is substantial at over AED 171 million. Despite this large exposure, the total claims paid are relatively low at AED 189,697.03.
+*   **Loss Ratio:** A particularly important metric is the **Loss Ratio**, which stands at 16.86%. This is calculated as (Total Claims / Total Premium) * 100. A loss ratio below 100% indicates that the premiums collected exceed the claims paid out for these policies, which is generally a healthy sign for the underwriting profitability of the insurer. A loss ratio of 16.86% is exceptionally low and suggests very favorable claims experience for this segment of business, contributing positively to the insurer's profitability.
+*   **Policy and Transaction Volume:** The broker has generated 95 policies, which involved 129 individual transactions. The higher number of transactions compared to policies can be attributed to multiple transactions per policy, such as endorsements, renewals, or installment payments.
+
+**Summary of Key Findings:**
+
+Al Afaq Insurance Brokers, specifically for policies handled by 'Al Afaq Insurance Brokers' as the agent in 2024 from the main branch, demonstrates strong financial performance with over AED 1.12 million in premiums and a very favorable loss ratio of 16.86%. The low loss ratio indicates excellent claims performance relative to the premiums generated, highlighting a profitable book of business for the insurer through this broker and agent combination. The broker successfully managed 95 policies across 129 transactions, contributing significantly to the insurer's portfolio.`;
+
+        const aiResult2 = `Here is a detailed breakdown of the premium, paid commission, sum insured, total claims, loss ratio, and the number of policies, categorized by product (minor-wise) for 'Al Afaq Insurance Brokers' in 2024, specifically for the main branch.
+
+The data reveals the performance across various product lines handled by Al Afaq Insurance Brokers, highlighting their activity in Engineering, Fire, Group Life & Medical, General Accident, and Motor insurance categories.
+
+ **Al Afaq Insurance Brokers - Product-wise Performance (Main Branch, 2024)**
+
+| Major Product Line       | Minor Product Type              | Premium (QAR) | Paid Commission (QAR) | Sum Insured (QAR) | Total Claims (QAR) | Loss Ratio (%) | Policy Count |
+| :----------------------- | :------------------------------ | :------------ | :-------------------- | :---------------- | :----------------- | :------------- | :----------- |
+| **Engineering**          |                                 |               |                       |                   |                    |                |              |
+|                          | Contractors All Risks           | 498,974.32    | 99,794.86             | 83,021,191.70     | 0.00               | 0.00           | 1            |
+|                          | Contractors Plant & Machinery   | 29,484.00     | 5,896.80              | 163,282.00        | 0.00               | 0.00           | 1            |
+|                          | Erection All Risks              | 2,500.00      | 500.00                | 1,329,678.00      | 0.00               | 0.00           | 1            |
+| **Fire**                 |                                 |               |                       |                   |                    |                |              |
+|                          | Property All Risk               | 2,500.00      | 500.00                | 97,200.00         | 0.00               | 0.00           | 1            |
+| **GROUP LIFE & MEDICAL** |                                 |               |                       |                   |                    |                |              |
+|                          | Group Life                      | 3,715.00      | 813.90                | 45,650,000.00     | 0.00               | 0.00           | 0            |
+|                          | Group Medical (DohaCare)        | 369,391.00    | 48,667.48             | 22,500,000.00     | 121,724.23         | 32.95          | 2            |
+|                          | Individual Medical (DohaCare)   | 825.00        | 82.50                 | 100,000.00        | 0.00               | 0.00           | 1            |
+|                          | Travel (Inbound)                | 100.00        | 0.00                  | 300,000.00        | 0.00               | 0.00           | 2            |
+|                          | Travel Inbound MOI              | 100.00        | 20.00                 | 300,000.00        | 0.00               | 0.00           | 2            |
+| **General Accident**     |                                 |               |                       |                   |                    |                |              |
+|                          | Professional Indemnity          | 99,099.00     | 19,682.30             | 250,000.00        | 0.00               | 0.00           | 1            |
+|                          | Public Liability (Premises)     | 6,250.00      | 1,250.00              | 4,642,000.00      | 0.00               | 0.00           | 2            |
+|                          | Public Liability (Project)      | 5,560.00      | 139.00                | 2,000,000.00      | 0.00               | 0.00           | 1            |
+|                          | Workmen's Compensation          | 32,147.27     | 3,541.01              | 9,796,327.00      | 0.00               | 0.00           | 3            |
+| **Motor**                |                                 |               |                       |                   |                    |                |              |
+|                          | Comp                            | 53,923.02     | 8,043.45              | 1,686,700.00      | 29,382.00          | 54.49          | 44           |
+|                          | T.P.L                           | 20,287.02     | 3,043.05              | 0.00              | 38,590.80          | 190.22         | 33           |
+
+**Key Insights and Business Context:**
+
+*   **Engineering Products Dominance in Premium and Sum Insured:** 'Contractors All Risks' under the Engineering major product line stands out with the highest premium generated (QAR 498,974.32) and the largest sum insured (QAR 83,021,191.70). This indicates a significant focus or success in securing large construction-related policies, which typically involve substantial project values.
+*   **Medical Insurance Performance:** 'Group Medical (DohaCare)' shows a substantial premium of QAR 369,391.00 and has incurred claims totaling QAR 121,724.23, resulting in a loss ratio of 32.95%. This loss ratio is within an acceptable range for medical insurance, suggesting a balanced claims experience relative to premiums.
+*   **Motor Insurance Activity and Loss Ratios:** Motor insurance, particularly 'Comp' (Comprehensive) and 'T.P.L' (Third Party Liability), shows the highest policy counts (44 and 33 respectively), indicating a high volume of transactions.
+    *   'Motor Comp' has a premium of QAR 53,923.02 with claims of QAR 29,382.00, leading to a loss ratio of 54.49%. This is a moderate loss ratio for motor comprehensive insurance.
+    *   'Motor T.P.L' has a premium of QAR 20,287.02 but a significantly higher claims amount of QAR 38,590.80, resulting in a high loss ratio of 190.22%. This indicates that claims paid out for Third Party Liability policies are substantially higher than the premiums collected for this specific product during the period, which could be a point of concern for profitability if this trend continues.
+*   **Low Claim Activity in Most Lines:** A large number of product types, including all Engineering and Fire products, as well as several General Accident and Group Life & Medical products (e.g., Group Life, Individual Medical, Travel), show zero total claims. This could imply a relatively low-risk portfolio for these specific products or that no major claim events occurred within the analyzed period for these policies.
+*   **Commission Structures:** The paid commission varies significantly by product. For instance, 'Contractors All Risks' has a high commission of QAR 99,794.86, reflecting its high premium. The commission rates appear to differ, with some products like 'Travel (Inbound)' showing QAR 0.00 commission, which might be due to specific agreements or policy types.
+*   **Policy Count vs. Premium:** While 'Motor Comp' and 'T.P.L' have the highest number of policies, their individual policy premiums are generally lower compared to high-value policies like 'Contractors All Risks'. This highlights the difference between high-volume, lower-premium products and lower-volume, higher-premium products in the broker's portfolio.
+
+**Summary of Key Findings:**
+
+Al Afaq Insurance Brokers' main branch in 2024 demonstrates strong performance in Engineering products, particularly 'Contractors All Risks', contributing significantly to premiums and sum insured with no claims reported. The Group Life & Medical segment, especially 'Group Medical (DohaCare)', is also a notable contributor with a manageable loss ratio. Motor insurance, while having the highest number of policies, shows a concerningly high loss ratio for 'Motor T.P.L', indicating that claims are exceeding premiums for this specific product line. Most other product lines show healthy performance with no reported claims during this period. Monitoring the 'Motor T.P.L' loss ratio will be crucial for the broker's overall profitability and risk management.`;
+
+        const aiResult3 = `Here is the customer-wise breakdown of premium, paid commission, sum insured, total claims, loss ratio, and the number of policies for 'Al Afaq Insurance Brokers' for the year 2024 at the Main Branch.
+
+**Al Afaq Insurance Brokers - Customer Performance Overview (Year 2024, Main Branch)**
+
+| Customer Name                                           | Premium (QAR) | Paid Commission (QAR) | Sum Insured (QAR) | Total Claims (QAR) | Loss Ratio (%) | Number of Policies |
+| :------------------------------------------------------ | ------------- | --------------------- | ----------------- | ------------------ | -------------- | ------------------ |
+| Petroserv for Oil & Gas W.L.L.                          | 490,474.32    | 98,094.86             | 53,368,391.70     | 0.00               | 0.00           | 2                  |
+| TDGISERV SERVICES                                       | 249,362.00    | 33,663.86             | 14,100,000.00     | 102,005.08         | 40.91          | 1                  |
+| Mazaya Medical Trading                                  | 120,029.00    | 15,003.62             | 8,400,000.00      | 19,719.15          | 16.43          | 1                  |
+| HARINSA CONTRACTING                                     | 96,349.00     | 19,269.80             | 0.00              | 0.00               | 0.00           | 0                  |
+| Qatar Consol WLL                                        | 30,633.27     | 3,238.21              | 8,819,407.00      | 0.00               | 0.00           | 2                  |
+| Rheinmetall Barzan Advanced Technologies QSTP-LLC (RBAT)| 29,484.00     | 5,896.80              | 163,282.00        | 0.00               | 0.00           | 1                  |
+| Constreite Qatar for Construction Maintenance WLL       | 13,500.00     | 2,700.00              | 30,750,000.00     | 0.00               | 0.00           | 1                  |
+| SUPPLYCO TRADIN AND SERVICES                            | 11,200.01     | 1,680.00              | 0.00              | 29,373.80          | 262.27         | 20                 |
+| QATAR CONSOL                                            | 11,125.00     | 1,668.75              | 163,800.00        | 5,155.00           | 46.34          | 8                  |
+| Eram Engineering Company WLL                            | 9,000.00      | 1,305.00              | 386,200.00        | 700.00             | 7.78           | 7                  |
+| Remal Security Services                                 | 5,875.00      | 1,006.25              | 1,379,678.00      | 0.00               | 0.00           | 4                  |
+| Petroserv Limited                                       | 5,560.00      | 139.00                | 2,000,000.00      | 0.00               | 0.00           | 1                  |
+| Barzan Holding QSTP LLC                                 | 5,133.00      | 1,026.60              | 49,500,000.00     | 0.00               | 0.00           | 0                  |
+| GETIT Trading                                           | 4,600.01      | 690.00                | 226,800.00        | 0.00               | 0.00           | 4                  |
+| شركة ايرام الهندسيه                                     | 4,350.00      | 652.50                | 233,000.00        | 7,727.00           | 177.63         | 5                  |
+| ERAM ENGINEERING COMPANY                                | 3,805.00      | 570.75                | 125,000.00        | 0.00               | 0.00           | 4                  |
+| Skylex Maintenance & Constructors CO WLL                | 3,750.00      | 750.00                | 3,642,000.00      | 0.00               | 0.00           | 1                  |
+| AHMED ABDULLA M A AL-KHULAIFI                           | 3,750.00      | 562.50                | 0.00              | 6,859.00           | 182.91         | 5                  |
+| OFFROAD GROUP                                           | 3,325.00      | 498.75                | 57,600.00         | 15,800.00          | 475.19         | 3                  |
+| MOHAMMED SABRI H H AL-ZAIDAN                            | 3,036.00      | 455.40                | 140,000.00        | 0.00               | 0.00           | 1                  |
+| Stratagema LLC                                          | 2,750.00      | 412.50                | 250,000.00        | 0.00               | 0.00           | 1                  |
+| Euro Postech International WLL                          | 2,664.00      | 475.30                | 976,920.00        | 2,358.00           | 88.51          | 3                  |
+| Q LIGHT QATAR                                           | 2,200.00      | 330.00                | 41,500.00         | 0.00               | 0.00           | 2                  |
+| GETIT MART                                              | 1,650.00      | 247.50                | 14,000.00         | 0.00               | 0.00           | 1                  |
+| SUPPLYCO TRADING SERVICES                               | 1,450.00      | 217.50                | 0.00              | 0.00               | 0.00           | 3                  |
+| HOME CORNER DESIGN AND DECORATION                       | 1,325.00      | 198.75                | 20,500.00         | 0.00               | 0.00           | 1                  |
+| PODERIO FOR TRADING AND CONT                            | 1,325.00      | 198.75                | 21,000.00         | 0.00               | 0.00           | 1                  |
+| AHMED ABDELHAMEED                                       | 1,316.00      | 197.40                | 63,000.00         | 0.00               | 0.00           | 1                  |
+| AL HAYAT MEDICAL CENTER                                 | 1,250.00      | 187.50                | 36,000.00         | 0.00               | 0.00           | 1                  |
+| Q Light Qatar                                           | 1,200.00      | 180.00                | 38,000.00         | 0.00               | 0.00           | 1                  |
+| New Crest Catering                                      | 1,150.00      | 172.50                | 30,000.00         | 0.00               | 0.00           | 1                  |
+| HEPSIBA RUTH SHANMUGHAM                                 | 966.00        | 144.90                | 15,300.00         | 0.00               | 0.00           | 1                  |
+| BASSEM MOSBAH ADROSS MOHAMED HABIB                      | 950.00        | 142.50                | 25,000.00         | 0.00               | 0.00           | 1                  |
+| MELANIE ACOSTA BARIT                                    | 825.00        | 82.50                 | 100,000.00        | 0.00               | 0.00           | 1                  |
+| MOHAMMED ALFADAL ABDAL HAFIZ OMAR                       | 500.00        | 75.00                 | 0.00              | 0.00               | 0.00           | 1                  |
+| REMAL ELECTRIC POWER                                    | 462.01        | 69.30                 | 0.00              | 0.00               | 0.00           | 0                  |
+| NEW AL RAYYAN TRADING                                   | 100.00        | 15.00                 | 0.00              | 0.00               | 0.00           | 0                  |
+| AL ADEED MOATH SALEH ALQADI                             | 100.00        | 10.00                 | 300,000.00        | 0.00               | 0.00           | 2                  |
+| NOOR SALEM HUSSEIN AL SALAHAT                           | 100.00        | 10.00                 | 300,000.00        | 0.00               | 0.00           | 2                  |
+| ALSWIDANI JAMAL NASSER                                  | 50.00         | 7.50                  | 0.00              | 0.00               | 0.00           | 0                  |
+| MOHAMED ALI A M AL-AHMAD                                | 50.00         | 7.50                  | 0.00              | 0.00               | 0.00           | 0                  |
+| E AND K DEVILOPMENT FOR TRADING AND CONTRACTING         | 50.00         | 7.50                  | 0.00              | 0.00               | 0.00           | 0                  |
+| HAMED SALIM G AL SAADI                                  | -499.99       | -75.00                | 0.00              | 0.00               | 0.00           | 0                  |
+| Dream Hotel Doha W.L.L                                  | -1,418.00     | -212.70               | -3,850,000.00     | 0.00               | 0.00           | 0                  |
+
+**Business Context and Insights:**
+
+*   **Premium and Sum Insured:** 'Petroserv for Oil & Gas W.L.L.' is the top customer for 'Al Afaq Insurance Brokers' in terms of premium generated (QAR 490,474.32) and also holds a significant sum insured (QAR 53,368,391.70). This indicates a strong business relationship and potentially high-value assets being insured. Another notable customer for sum insured is 'Barzan Holding QSTP LLC' with QAR 49,500,000.00, despite a lower premium, suggesting large, possibly low-risk, insured values.
+*   **Paid Commission:** The paid commission directly correlates with the premium generated, reflecting the broker's earnings from these policies. 'Petroserv for Oil & Gas W.L.L.' leads with QAR 98,094.86 in paid commission.
+*   **Total Claims and Loss Ratio:**
+    *   Several customers, such as 'Petroserv for Oil & Gas W.L.L.', 'Mazaya Medical Trading', and 'Qatar Consol WLL', show a 0.00% loss ratio, indicating no claims were made against their policies in 2024, which is favorable for profitability.
+    *   Conversely, some customers exhibit high loss ratios, signifying that claims paid exceeded or were a significant portion of the premiums collected. For instance, 'OFFROAD GROUP' has a loss ratio of 475.19% (QAR 15,800 in claims vs. QAR 3,325 in premium), 'SUPPLYCO TRADIN AND SERVICES' at 262.27%, and 'AHMED ABDULLA M A AL-KHULAIFI' at 182.91%. These high loss ratios highlight customers where claims costs have been substantially higher than the premiums, which could indicate higher risk profiles or specific claim events during the year. These customers warrant further review to understand the underlying causes of the high claims.
+    *   A loss ratio above 100% means the insurer paid out more in claims than it collected in premiums for that customer, indicating an underwriting loss.
+*   **Number of Policies:** 'SUPPLYCO TRADIN AND SERVICES' has the highest number of policies (20), even though its premium is modest, suggesting multiple smaller policies or a high volume of transactions. This customer also has a very high loss ratio, which could be a concern if these policies are individually small but collectively generate significant claims.
+*   **Negative Premium/Commission:** Two customers, 'HAMED SALIM G AL SAADI' and 'Dream Hotel Doha W.L.L', show negative premiums and commissions. This typically indicates policy cancellations or premium adjustments resulting in a refund to the customer or a reversal of premium/commission, rather than new business.
+
+**Summary of Key Findings:**
+
+The data provides a clear view of 'Al Afaq Insurance Brokers' performance with its customers at the Main Branch in 2024. 'Petroserv for Oil & Gas W.L.L.' is the top contributor in terms of premium and sum insured, with no claims, demonstrating a healthy and profitable relationship. However, a few customers, notably 'OFFROAD GROUP' and 'SUPPLYCO TRADIN AND SERVICES', exhibit significantly high loss ratios, indicating that the claims incurred for these customers far exceeded their premiums. This suggests a need for a deeper analysis of their policy types, risk assessments, and claims history to ensure sustainable profitability for the broker. The presence of negative premiums points to policy cancellations or adjustments, which are normal business operations but should be monitored for trends.`;
+
+        const aiResult4 = `For customer **Ezdan Holding Group** (Customer Code: **8000115009**), here is the detailed policy-wise information for policies classified under the **GROUP LIFE & MEDICAL** major type, including all document types:
+
+Across all policies retrieved, the major type is consistently **GROUP LIFE & MEDICAL** with a minor type of **Group Medical (DohaCare)** and a business type of **Co-Insurance**.
+
+Here is the breakdown for each policy:
+
+   **Policy Year: 2019 | Policy Number: 26**
+    *   Customer Code: 8000115009
+    *   Customer Name: Ezdan Holding Group
+    *   Major: GROUP LIFE & MEDICAL
+    *   Minor: Group Medical (DohaCare)
+    *   Business Type: Co-Insurance
+    *   Sum Insured: QAR 84,958,500.00
+    *   Premium: QAR 1,336,601.97
+    *   Total Claim: QAR 1,029,867.03
+    *   Loss Ratio: 77.05%
+    *   *Insight:  This policy shows a healthy loss ratio below 100%, indicating that premiums collected were significantly higher than claims paid for the year.
+
+   **Policy Year: 2020 | Policy Number: 25**
+    *   Customer Code: 8000115009
+    *   Customer Name: Ezdan Holding Group
+    *   Major: GROUP LIFE & MEDICAL
+    *   Minor: Group Medical (DohaCare)
+    *   Business Type: Co-Insurance
+    *   Sum Insured: QAR 64,362,500.00
+    *   Premium: QAR 1,232,628.47
+    *   Total Claim: QAR 626,419.11
+    *   Loss Ratio: 50.82%
+    *   *Insight: This policy demonstrates a very strong performance with a loss ratio of just over 50%, implying excellent profitability for the insurer from this specific policy year.
+
+   **Policy Year: 2021 | Policy Number: 27**
+    *   Customer Code: 8000115009
+    *   Customer Name: Ezdan Holding Group
+    *   Major: GROUP LIFE & MEDICAL
+    *   Minor: Group Medical (DohaCare)
+    *   Business Type: Co-Insurance
+    *   Sum Insured: QAR 0.00
+    *   Premium: QAR 904,314.54
+    *   Total Claim: QAR 1,112,458.31
+    *   Loss Ratio: 123.02%
+    *   *Insight: This policy exhibits a loss ratio significantly above 100%, indicating that claims paid substantially exceeded the premiums collected. The Sum Insured being QAR 0.00 might suggest a specific type of arrangement or an administrative policy where the Sum Insured is not tracked in this field.
+
+   **Policy Year: 2022 | Policy Number: 51**
+    *   Customer Code: 8000115009
+    *   Customer Name: Ezdan Holding Group
+    *   Major: GROUP LIFE & MEDICAL
+    *   Minor: Group Medical (DohaCare)
+    *   Business Type: Co-Insurance
+    *   Sum Insured: QAR 0.00
+    *   Premium: QAR 685,749.23
+    *   Total Claim: QAR 821,614.63
+    *   Loss Ratio: 119.81%
+    *   *Insight: Similar to 2021, this policy also shows a loss ratio above 100%, indicating claims paid were higher than premiums. The QAR 0.00 Sum Insured points to a similar potential policy structure or tracking method.
+
+   **Policy Year: 2023 | Policy Number: 86**
+    *   Customer Code: 8000115009
+    *   Customer Name: Ezdan Holding Group
+    *   Major: GROUP LIFE & MEDICAL
+    *   Minor: Group Medical (DohaCare)
+    *   Business Type: Co-Insurance
+    *   Sum Insured: QAR 39,650,000.00
+    *   Premium: QAR 745,729.59
+    *   Total Claim: QAR 885,298.11
+    *   Loss Ratio: 118.72%
+    *   *Insight: This policy continues the trend of higher loss ratios, with claims exceeding premiums. This suggests a period of elevated claim activity relative to the premiums charged for these group medical policies.
+
+   **Policy Year: 2025 | Policy Number: 124**
+    *   Customer Code: 8000115009
+    *   Customer Name: Ezdan Holding Group
+    *   Major: GROUP LIFE & MEDICAL
+    *   Minor: Group Medical (DohaCare)
+    *   Business Type: Co-Insurance
+    *   Sum Insured: QAR 4,800,000.00
+    *   Premium: QAR 46,341.00
+    *   Total Claim: QAR 0.00
+    *   Loss Ratio: 0.00%
+    *   *Insight: As a policy for the year 2025, a 0.00% loss ratio and QAR 0.00 total claim is expected, likely indicating that it is a new or recently issued policy for which no claims have been reported or processed yet.
+
+   **Policy Year: 2025 | Policy Number: 125**
+    *   Customer Code: 8000115009
+    *   Customer Name: Ezdan Holding Group
+    *   Major: GROUP LIFE & MEDICAL
+    *   Minor: Group Medical (DohaCare)
+    *   Business Type: Co-Insurance
+    *   Sum Insured: QAR 45,440,000.00
+    *   Premium: QAR 936,165.00
+    *   Total Claim: QAR 0.00
+    *   Loss Ratio: 0.00%
+    *   *Insight: Similar to policy 124, this 2025 policy also shows no claims or loss ratio, consistent with its recent inception.
+
+**Summary of Key Findings:**
+
+The data for Ezdan Holding Group's Group Life & Medical policies shows a varied performance over the years. While 2019 and 2020 policies had favorable loss ratios (77.05% and 50.82% respectively), indicating strong underwriting results, the policies from 2021, 2022, and 2023 experienced loss ratios significantly above 100% (123.02%, 119.81%, and 118.72% respectively). This indicates that for these years, the total claims paid exceeded the premiums earned, suggesting a period of higher claims frequency or severity. The policies for 2025 are new and currently show no claims activity, which is typical for recently issued policies. The recurring QAR 0.00 Sum Insured for policies in 2021 and 2022 warrants further investigation to understand the specific policy structure or data recording practices for these years.`;
+
+        const aiResult5 = `Write here the AI results for the test.`;
+        
+        const aiResultn = `Write here the AI results for the test.`;
+        
+        document.getElementById('ai-result-1').innerHTML = parseMarkdown(aiResult1);
+        document.getElementById('ai-result-3').innerHTML = parseMarkdown(aiResult3);
+        document.getElementById('ai-result-4').innerHTML = parseMarkdown(aiResult4);
+        document.getElementById('ai-result-5').innerHTML = parseMarkdown(aiResult5);
+        document.getElementById('ai-result-n').innerHTML = parseMarkdown(aiResultn);
+    </script>
+</body>
+</html>

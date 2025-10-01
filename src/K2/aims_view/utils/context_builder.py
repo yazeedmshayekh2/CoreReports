@@ -15,7 +15,7 @@ Multi-national insurance company with 5 branches, 32 offices, and 9 lines of bus
 ORGANIZATIONAL STRUCTURE:
 • 5 Main Branches: Main Branch (21 offices), Doha Islamic - Shamel (8 Takaful offices), India Branch (1), Mena Life (1), Mena Re Underwriters (1)
 • 32 Total Offices across Qatar, India, Lebanon, and Dubai
-• 9 Lines of Business: Motor, Group Life & Medical, Fire, General Accident, Marine Cargo, Marine Hull, Aviation, Energy, Engineering
+• 9 Lines of Business: Motor, GROUP LIFE & MEDICAL, Fire, General Accident, Marine Cargo, Marine Hull, Aviation, Energy, Engineering
 • 4 Distribution Channel Types: Digital (WEB, Online agents, Call Center), Retail (Lulu Centers), Partnerships (Qatar Energy, Hamad Airport), Specialized operations
 • International Presence: Qatar (main operations), India (IFSC), Lebanon (Mena Life), Dubai (Mena Re)
 

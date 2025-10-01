@@ -351,16 +351,21 @@ class SecureOracleDBUtils:
                 logger.error(f"Database connection test failed: {type(e).__name__}")
             return False
         
-if __name__ == "__main__":
-    db_utils = SecureOracleDBUtils()
-    query= """
-    SELECT
-      COUNT(DISTINCT CLAIM_NO)
-  FROM
-      insmv.AIMS_ALL_DATA
-  WHERE
-      DOC_MAJ_NAME = 'Motor'
-      AND EXTRACT(YEAR FROM DOC_REG_DT) = 2022
-      AND CLAIM_NO IS NOT NULL
-    """
-    print(db_utils._safe_execute_query(query))
+class DomainKnowledge(SecureOracleDBUtils):
+    """Domain knowledge for the AIMS database"""
+    
+    def __init__(self):
+        super().__init__()
+    
+    def dynamic_branches(self):
+        """Get the dynamic branches for the AIMS database"""
+        query = """
+        SELECT DISTINCT DOC_BRANCH, DOC_BRANCH_NAME FROM insmv.AIMS_ALL_DATA
+        """
+        df = self._safe_execute_query(query)
+        zip_df = zip(df['DOC_BRANCH'], df['DOC_BRANCH_NAME'])
+        list_zip_df = list(zip_df)
+        knowledge = {
+            "dynamic_branches": list_zip_df
+        }
+        return knowledge

@@ -41,7 +41,7 @@ class NameMatcher:
             select the correct customer from multiple options.""",
             verbose=True,
             allow_delegation=False,
-            llm=self.llm_factory.create_gemini_llm(),
+            llm=self.llm_factory.create_gemini_pro_llm(),
             max_iter=3
         )
     
